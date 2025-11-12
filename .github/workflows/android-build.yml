@@ -8,12 +8,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 11 (compatible with older Android Gradle plugin)
+      - name: Set up JDK 11 (compatible with AGP 7.x)
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -22,24 +21,18 @@ jobs:
       - name: Install Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install SDK packages
+      - name: Accept licenses & install packages
         run: |
           yes | sdkmanager --licenses > /dev/null
           sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
-      - name: Use Gradle 7.6
-        run: |
-          wget https://services.gradle.org/distributions/gradle-7.6-bin.zip -O /tmp/gradle-7.6-bin.zip
-          unzip -q /tmp/gradle-7.6-bin.zip -d $HOME/gradle
-          echo "$HOME/gradle/gradle-7.6/bin" >> $GITHUB_PATH
+      - name: Make gradlew executable
+        run: chmod +x gradlew
 
-      - name: Grant gradlew permission
-        run: chmod +x gradlew || true
+      - name: Build Debug APK (with logs)
+        run: ./gradlew clean assembleDebug --no-daemon --stacktrace | tee build.log
 
-      - name: Build Debug APK
-        run: gradle clean assembleDebug --no-daemon --stacktrace | tee build.log
-
-      - name: Upload APK
+      - name: Upload APK artifact
         if: success()
         uses: actions/upload-artifact@v4
         with:
