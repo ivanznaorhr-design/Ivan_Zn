@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Hajduk – Arheološke i hajdučke točke</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <style>
+    html, body, #map { height:100%; margin:0; }
+    .toolbar {
+      position: fixed; z-index: 1000; top: 8px; left: 8px;
+      background: #fff; padding: 6px 8px; border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.25); font-family: system-ui, sans-serif;
+    }
+    select { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    Kategorija:
+    <select id="cat">
+      <option value="sve">Sve</option>
+      <option value="hajduk">Hajduk</option>
+      <option value="arheo">Arheologija</option>
+    </select>
+    &nbsp; Period:
+    <select id="period">
+      <option value="svi">Svi</option>
+      <option value="prapovijest">Prapovijest</option>
+      <option value="antika">Antika</option>
+      <option value="srednji_vijek">Srednji vijek</option>
+      <option value="osmansko">Osmansko</option>
+      <option value="habsbursko">Habsburško</option>
+    </select>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([43.4467, 17.2169], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19, attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    let layer = null;
+    const periodSel = document.getElementById('period');
+    const catSel = document.getElementById('cat');
+
+    function colorForCategory(cat) {
+      return cat === 'hajduk' ? '#d32f2f' : '#1565c0'; // crvena / plava
+    }
+
+    function render(data) {
+      if (layer) map.removeLayer(layer);
+      const cat = catSel.value;
+      const per = periodSel.value;
+
+      const feats = data.features.filter(f => {
+        const p = f.properties || {};
+        const okCat = (cat === 'sve') ? true : (p.category === cat);
+        const okPer = (per === 'svi') ? true : (p.period === per);
+        return okCat && okPer;
+      });
+
+      layer = L.geoJSON({ type:'FeatureCollection', features: feats }, {
+        pointToLayer: (f, latlng) => {
+          const c = colorForCategory((f.properties||{}).category);
+          return L.circleMarker(latlng, {
+            radius: 7, color: c, weight: 2, fillColor: c, fillOpacity: 0.7
+          });
+        },
+        onEachFeature: (f, l) => {
+          const p = f.properties || {};
+          const desc = p.story || p.desc || '';
+          const src = p.sources ? `<br/><small><a target="_blank" href="${p.sources}">Izvor</a></small>` : '';
+          l.bindPopup(`<b>${p.name || 'Nepoznato'}</b><br/>${desc}${src}`);
+        }
+      }).addTo(map);
+
+      if (feats.length) {
+        const b = layer.getBounds();
+        if (b.isValid()) map.fitBounds(b.pad(0.2));
+      }
+    }
+
+    let DATA = null;
+    async function load() {
+      const resp = await fetch('sites.geojson');
+      DATA = await resp.json();
+      render(DATA);
+    }
+
+    periodSel.onchange = () => render(DATA);
+    catSel.onchange = () => render(DATA);
+    load();
+  </script>
+</body>
+</html>

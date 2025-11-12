@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "category": "hajduk",
+        "name": "Pećina kod Prološkog blata",
+        "period": "osmansko",
+        "story": "Skrovište družine; predaja o zasjedi na putu prema Posušju.",
+        "sources": ""
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2195, 43.4208] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "category": "arheo",
+        "name": "Imotski – tvrđava Topana",
+        "period": "srednji_vijek",
+        "desc": "Srednjovjekovna tvrđava s kasnijim preinakama.",
+        "sources": "https://hr.wikipedia.org/wiki/Topana_(tvr%C4%91ava)"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2169, 43.4467] }
+    }
+  ]
+}

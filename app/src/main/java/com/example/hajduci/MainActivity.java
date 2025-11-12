@@ -14,14 +14,14 @@ public class MainActivity extends AppCompatActivity {
         WebView webView = new WebView(this);
         WebSettings s = webView.getSettings();
         s.setJavaScriptEnabled(true);
+        s.setDomStorageEnabled(true);      // za fetch i localStorage
         s.setAllowFileAccess(true);
         s.setAllowContentAccess(true);
-        // omogućava učitavanje resursa s file:// iz HTML-a
         s.setAllowUniversalAccessFromFileURLs(true);
         s.setAllowFileAccessFromFileURLs(true);
 
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("file:///android_asset/map/index.html");
+        webView.loadUrl("file:///android_asset/map.html");
         setContentView(webView);
     }
 }
