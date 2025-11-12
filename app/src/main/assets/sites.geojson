@@ -1,1 +1,141 @@
-# (ovdje ću ti zalijepiti ispravan sadržaj)
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point","coordinates": [17.21530, 43.44770]},
+      "properties": {
+        "id": "gradina-imotski",
+        "name": "Gradina – Imotski",
+        "category": "Utvrda",
+        "period": "Srednji vijek",
+        "importance": 5,
+        "confidence": "high",
+        "why": "Dominantna pozicija i povijesni zapisi o utvrdi.",
+        "desc": "Središnja utvrda Imotskog, stalno naseljena od 10. stoljeća do Habsburškog razdoblja. Ostatci zidina i kula.",
+        "evidence": "Arheološki ostaci, spomeni u mletačkim i turskim popisima.",
+        "source": "Povijesni arhiv Split, Mletački izvori 16. st.",
+        "next_steps": "Fotogrametrija zidina, GIS analiza terena."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point","coordinates": [17.22510, 43.45550]},
+      "properties": {
+        "id": "vinjani-1",
+        "name": "Vinjani – mjesto zasjede hajduka",
+        "category": "Zasjeda / bitka",
+        "period": "Osmansko razdoblje",
+        "importance": 4,
+        "confidence": "medium",
+        "why": "Toponimi i usmena predaja spominju sukob karavane i hajduka.",
+        "desc": "Lokalitet kod starog puta između Imotskog i Posušja. Vjerojatno zasjeda hajduka iz 17. stoljeća.",
+        "evidence": "Toponimi (Krvavi dolac, Bandijera), priče iz 19. st.",
+        "source": "Etnografski zapisi Imotska krajina (1952).",
+        "next_steps": "Sondiranje i prikupljanje metala; kontakt s lokalnim stanovništvom."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point","coordinates": [17.27490, 43.47050]},
+      "properties": {
+        "id": "gran-medjas-2",
+        "name": "Granični međaš – kamen s križem",
+        "category": "Granični kamen",
+        "period": "Habsburško razdoblje",
+        "importance": 3,
+        "confidence": "medium",
+        "why": "Uklasani znak potvrđuje trasu stare granice.",
+        "desc": "Kameni međaš između austrijske i osmanske granice, s urezanim križem.",
+        "evidence": "Karte + toponimi 'međaš'.",
+        "source": "Katastralne karte 1830.",
+        "next_steps": "Fotogrametrija; 3D dokumentacija kamena."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point","coordinates": [17.19610, 43.51010]},
+      "properties": {
+        "id": "vg-pojilo-1",
+        "name": "Pojilo – sastanak stočara i karavana",
+        "category": "Logistika / karavane",
+        "period": "Novi vijek",
+        "importance": 2,
+        "confidence": "low",
+        "why": "Mjesto visoke interakcije, potencijalni nalazi predmeta iz karavana.",
+        "desc": "Pojilo između Prološca i Vinjana. Arheološki potencijal: novac, kopče, oruđe.",
+        "evidence": "Funkcionalna logika + stari putevi.",
+        "source": "Toponimi i analize staza s LiDAR-a.",
+        "next_steps": "Fieldwalking nakon kiše; površinsko prikupljanje artefakata."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point","coordinates": [17.20250, 43.47200]},
+      "properties": {
+        "id": "karavanski-put",
+        "name": "Stari karavanski put – Imotski → Posušje",
+        "category": "Put / trasa",
+        "period": "Osmansko razdoblje",
+        "importance": 4,
+        "confidence": "high",
+        "why": "Trasa karavana potvrđena više izvora.",
+        "desc": "Put povezivao unutrašnjost s morem, korišten i za krijumčarenje i hajdučke prepade.",
+        "evidence": "Austrougarske karte i arheološki nalazi uz trasu.",
+        "source": "Topografske karte 19. st., lokalna predaja.",
+        "next_steps": "GPS rekonstrukcija, digitalni model reljefa."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point","coordinates": [17.28770, 43.43890]},
+      "properties": {
+        "id": "gradina-zmijavci",
+        "name": "Gradina Zmijavci",
+        "category": "Utvrda / naselje",
+        "period": "Prapovijest – Ilirsko razdoblje",
+        "importance": 5,
+        "confidence": "high",
+        "why": "Ostaci bedema i keramike iz brončanog doba.",
+        "desc": "Ilirska gradina s pogledom na Imotsko polje, korištena do rimskog razdoblja.",
+        "evidence": "Nalazi keramike i oruđa.",
+        "source": "Arheološka topografija Dalmacije, knj. III.",
+        "next_steps": "Površinski pregled; koordinacija s konzervatorima."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point","coordinates": [17.24010, 43.44120]},
+      "properties": {
+        "id": "bitka-1717",
+        "name": "Bitka kod Imotskog 1717.",
+        "category": "Bitka",
+        "period": "Mletačko razdoblje",
+        "importance": 5,
+        "confidence": "high",
+        "why": "Zabilježena u mletačkim vojnim zapisima.",
+        "desc": "Bitka između Mlečana i Osmanlija; oslobođenje Imotskog.",
+        "evidence": "Vojni zapisi, mletačke karte, artiljerijski položaji.",
+        "source": "Archivio di Stato di Venezia, mletački izvještaji.",
+        "next_steps": "Arhivsko istraživanje + metal detekcija s dozvolom."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point","coordinates": [17.26010, 43.46590]},
+      "properties": {
+        "id": "hajducki-logor",
+        "name": "Hajdučki logor kod Vinjana",
+        "category": "Lokalitet / logor",
+        "period": "Osmansko razdoblje",
+        "importance": 4,
+        "confidence": "medium",
+        "why": "Usmena predaja i položaj pogodan za zaklon i napad.",
+        "desc": "Šumoviti plato s izvorom vode; spominje se kao logor hajduka harambaše Joze Kalaje.",
+        "evidence": "Etnografski zapisi i toponim ‘Hajdučka draga’.",
+        "source": "Zbornik Imotske krajine 1936.",
+        "next_steps": "Terenska provjera; snimanje dronom."
+      }
+    }
+  ]
+}
