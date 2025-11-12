@@ -1,75 +1,149 @@
-<!DOCTYPE html><html><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Hajduk – karta</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<style>
-  html,body,#map{height:100%;margin:0}
-  .toolbar{position:fixed;z-index:1000;top:8px;left:8px;background:#fff;padding:8px 10px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.25);font:14px system-ui,sans-serif}
-  .badge{display:inline-block;margin-left:8px;padding:2px 6px;background:#222;color:#fff;border-radius:6px;font-size:12px}
-</style>
-</head><body>
-<div class="toolbar">
-  <b>Hajduk karta</b> <span class="badge" id="status">HTML</span><br/>
-  Kategorija:
-  <select id="cat">
-    <option value="sve">Sve</option>
-    <option value="hajduk">Hajduk</option>
-    <option value="arheo">Arheologija</option>
-  </select>
-  &nbsp;Period:
-  <select id="period">
-    <option value="svi">Svi</option>
-    <option value="prapovijest">Prapovijest</option>
-    <option value="antika">Antika</option>
-    <option value="srednji_vijek">Srednji vijek</option>
-    <option value="osmansko">Osmansko</option>
-    <option value="habsburško">Habsburško</option>
-  </select>
-</div>
-<div id="map"></div>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-  const map=L.map('map').setView([43.4467,17.2169],11);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
-
-  const fb=L.circleMarker([43.4467,17.2169],{radius:8,color:'#444',fillColor:'#999',fillOpacity:.7})
-    .bindPopup('Aplikacija radi. Čekam sites.geojson...').addTo(map);
-
-  let layer=null, DATA=null;
-  const catSel=document.getElementById('cat'), perSel=document.getElementById('period'), status=document.getElementById('status');
-
-  function color(cat){return cat==='hajduk'?'#d32f2f':'#1565c0'}
-  function render(){
-    if(!DATA) return;
-    if(layer) map.removeLayer(layer);
-    const cat=catSel.value, per=perSel.value;
-    const feats=DATA.features.filter(f=>{
-      const p=f.properties||{};
-      const okC=(cat==='sve')||p.category===cat;
-      const okP=(per==='svi')||p.period===per;
-      return okC&&okP;
-    });
-    layer=L.geoJSON({type:'FeatureCollection',features:feats},{
-      pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:7,color:color((f.properties||{}).category),weight:2,fillColor:color((f.properties||{}).category),fillOpacity:.8}),
-      onEachFeature:(f,l)=>{
-        const p=f.properties||{};
-        const src=p.sources?`<br/><small><a target="_blank" href="${p.sources}">Izvor</a></small>`:'';
-        l.bindPopup(`<b>${p.name||'Nepoznato'}</b><br/>${p.story||p.desc||''}${src}`);
-      }
-    }).addTo(map);
-    if(feats.length){const b=layer.getBounds(); if(b.isValid()) map.fitBounds(b.pad(.2));}
-  }
-  catSel.onchange=render; perSel.onchange=render;
-
-  (async ()=>{
-    status.textContent='Učitavam točke...';
-    try{
-      const r=await fetch('sites.geojson'); if(!r.ok) throw new Error('HTTP '+r.status);
-      DATA=await r.json(); render(); status.textContent='Točke učitane';
-      try{map.removeLayer(fb);}catch(e){}
-    }catch(e){
-      console.error(e); status.textContent='Greška: sites.geojson'; alert('Nema sites.geojson. Stavili smo fallback marker.');
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Hajduci – karta</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    html,body,#map{height:100%;margin:0}
+    .toolbar{
+      position:fixed;z-index:1000;left:8px;top:8px;
+      background:#fff;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.2);
+      padding:8px 10px;font-family:system-ui,-apple-system,Roboto,Arial,sans-serif;font-size:14px
     }
-  })();
+    .toolbar select,.toolbar input{margin:4px 0;width:220px}
+    .status{margin-top:4px;font-size:12px;color:#444}
+    .popup-title{font-weight:700;margin-bottom:4px}
+    .popup-desc{margin-top:4px}
+    .legend{position:fixed;right:8px;bottom:8px;background:#fff;padding:6px 8px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.2);font-size:12px}
+    .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+  </style>
+</head>
+<body>
+<div class="toolbar">
+  <div><b>Hajduci – karta</b></div>
+  <label>Razdoblje:
+    <select id="periodSel">
+      <option value="">Sva</option>
+      <option>Prapovijest</option>
+      <option>Antika</option>
+      <option>Srednji vijek</option>
+      <option>Osmansko razdoblje</option>
+      <option>Habsburško razdoblje</option>
+    </select>
+  </label><br/>
+  <label>Kategorija:
+    <select id="catSel">
+      <option value="">Sve</option>
+      <option>Gradina</option>
+      <option>Nalazište</option>
+      <option>Kula/stražara</option>
+      <option>Bitka/događaj</option>
+      <option>Legenda/Hajduci</option>
+    </select>
+  </label><br/>
+  <input id="q" placeholder="Pretraži naziv/opis…"/>
+  <div class="status" id="status">Učitavam…</div>
+</div>
+
+<div id="map"></div>
+
+<div class="legend">
+  <div><span class="dot" style="background:#d91e18"></span>Gradina</div>
+  <div><span class="dot" style="background:#2ecc71"></span>Nalazište</div>
+  <div><span class="dot" style="background:#2980b9"></span>Kula/stražara</div>
+  <div><span class="dot" style="background:#8e44ad"></span>Događaj</div>
+  <div><span class="dot" style="background:#f39c12"></span>Legenda</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map = L.map('map',{zoomControl:true}).setView([43.446,17.214], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  maxZoom:19, attribution:'&copy; OpenStreetMap'
+}).addTo(map);
+
+// boje po kategoriji
+const colorByCat = c => ({
+  'Gradina':'#d91e18',
+  'Nalazište':'#2ecc71',
+  'Kula/stražara':'#2980b9',
+  'Bitka/događaj':'#8e44ad',
+  'Legenda/Hajduci':'#f39c12'
+}[c] || '#34495e');
+
+let all = [];
+let layer = L.layerGroup().addTo(map);
+
+function render(){
+  layer.clearLayers();
+  const per = document.getElementById('periodSel').value.trim().toLowerCase();
+  const cat = document.getElementById('catSel').value.trim().toLowerCase();
+  const q   = document.getElementById('q').value.trim().toLowerCase();
+
+  const feats = all.filter(f=>{
+    const p=f.properties||{};
+    const okPer = !per || (p.period||'').toLowerCase()===per;
+    const okCat = !cat || (p.category||'').toLowerCase()===cat;
+    const hay = ((p.name||'')+' '+(p.desc||'')).toLowerCase();
+    const okQ = !q || hay.includes(q);
+    return okPer && okCat && okQ;
+  });
+
+  feats.forEach(f=>{
+    const [lng,lat]=f.geometry.coordinates;
+    const p=f.properties||{};
+    const m=L.circleMarker([lat,lng],{
+      radius:7, weight:2, color:'#fff', fillColor:colorByCat(p.category), fillOpacity:0.95
+    }).bindPopup(
+      `<div class="popup-title">${p.name||'(bez naziva)'}</div>
+       <div><b>Kategorija:</b> ${p.category||'-'}</div>
+       <div><b>Razdoblje:</b> ${p.period||'-'}</div>
+       ${p.src?`<div><a href="${p.src}" target="_blank">Izvor</a></div>`:''}
+       ${p.desc?`<div class="popup-desc">${p.desc}</div>`:''}`
+    );
+    m.addTo(layer);
+  });
+
+  document.getElementById('status').textContent =
+    `Točaka: ${feats.length} / ${all.length}`;
+  if (feats.length) {
+    const b=L.featureGroup(layer.getLayers()).getBounds();
+    if (b.isValid()) map.fitBounds(b.pad(0.2));
+  }
+}
+
+document.getElementById('periodSel').onchange = render;
+document.getElementById('catSel').onchange = render;
+document.getElementById('q').oninput = ()=>{ clearTimeout(window._t); window._t=setTimeout(render,200); };
+
+(async ()=>{
+  const status = document.getElementById('status');
+  try{
+    status.textContent='Učitavam točke…';
+    const r = await fetch('sites.geojson');
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    const gj = await r.json();
+    all = gj.features||[];
+    status.textContent='Točke učitane.';
+    render();
+  }catch(e){
+    // fallback demo podaci ako nema sites.geojson
+    all = [{
+      "type":"Feature","geometry":{"type":"Point","coordinates":[17.2153,43.4476]},
+      "properties":{"name":"Gradina – Imotski","category":"Gradina","period":"Srednji vijek","desc":"Ostaci utvrde iznad grada."}
+    },{
+      "type":"Feature","geometry":{"type":"Point","coordinates":[17.2011,43.4468]},
+      "properties":{"name":"Kula stražara","category":"Kula/stražara","period":"Osmansko razdoblje","desc":"Stražarska točka na prijelazu."}
+    },{
+      "type":"Feature","geometry":{"type":"Point","coordinates":[17.2308,43.4419]},
+      "properties":{"name":"Legenda o hajducima","category":"Legenda/Hajduci","period":"Habsburško razdoblje","desc":"Predaja o zasjedi.","src":"https://example.com"}
+    }];
+    status.textContent='Nije nađen sites.geojson – prikazujem demo točke.';
+    render();
+  }
+})();
 </script>
-</body></html>
+</body>
+</html>

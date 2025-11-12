@@ -1,27 +1,17 @@
 {
   "type": "FeatureCollection",
   "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "category": "hajduk",
-        "name": "Pećina kod Prološkog blata",
-        "period": "osmansko",
-        "story": "Skrovište družine; predaja o zasjedi na putu prema Posušju.",
-        "sources": ""
-      },
-      "geometry": { "type": "Point", "coordinates": [17.2195, 43.4208] }
+    { "type":"Feature",
+      "geometry":{"type":"Point","coordinates":[17.21530,43.44760]},
+      "properties":{"name":"Gradina – Imotski","category":"Gradina","period":"Srednji vijek","desc":"Ostaci utvrde iznad grada.","src":""}
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "category": "arheo",
-        "name": "Imotski – tvrđava Topana",
-        "period": "srednji_vijek",
-        "desc": "Srednjovjekovna tvrđava s kasnijim preinakama.",
-        "sources": "https://hr.wikipedia.org/wiki/Topana_(tvr%C4%91ava)"
-      },
-      "geometry": { "type": "Point", "coordinates": [17.2169, 43.4467] }
+    { "type":"Feature",
+      "geometry":{"type":"Point","coordinates":[17.20110,43.44680]},
+      "properties":{"name":"Kula stražara","category":"Kula/stražara","period":"Osmansko razdoblje","desc":"Stražarska točka na prijelazu.","src":""}
+    },
+    { "type":"Feature",
+      "geometry":{"type":"Point","coordinates":[17.23080,43.44190]},
+      "properties":{"name":"Legenda o hajducima","category":"Legenda/Hajduci","period":"Habsburško razdoblje","desc":"Predaja o zasjedi.","src":"https://example.com"}
     }
   ]
 }
