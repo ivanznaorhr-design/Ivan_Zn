@@ -1,18 +1,27 @@
 package com.example.hajduci;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         WebView webView = new WebView(this);
-        webView.getSettings().setJavaScriptEnabled(true);
+        WebSettings s = webView.getSettings();
+        s.setJavaScriptEnabled(true);
+        s.setAllowFileAccess(true);
+        s.setAllowContentAccess(true);
+        // omogućava učitavanje resursa s file:// iz HTML-a
+        s.setAllowUniversalAccessFromFileURLs(true);
+        s.setAllowFileAccessFromFileURLs(true);
+
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.openstreetmap.org");
+        webView.loadUrl("file:///android_asset/map/index.html");
         setContentView(webView);
     }
 }

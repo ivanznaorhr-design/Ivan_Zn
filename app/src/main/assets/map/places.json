@@ -1,0 +1,11 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    { "type": "Feature",
+      "properties": { "title": "Imotski", "description": "Centar" },
+      "geometry": { "type": "Point", "coordinates": [17.216, 43.446] } },
+    { "type": "Feature",
+      "properties": { "title": "Modro jezero", "description": "Prirodna atrakcija" },
+      "geometry": { "type": "Point", "coordinates": [17.2189, 43.4469] } }
+  ]
+}
