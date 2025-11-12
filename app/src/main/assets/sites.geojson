@@ -1,17 +1,296 @@
 {
   "type": "FeatureCollection",
   "features": [
-    { "type":"Feature",
-      "geometry":{"type":"Point","coordinates":[17.21530,43.44760]},
-      "properties":{"name":"Gradina – Imotski","category":"Gradina","period":"Srednji vijek","desc":"Ostaci utvrde iznad grada.","src":""}
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.21690,43.44670]},
+      "properties":{
+        "id":"im-topana","name":"Gradina – Imotski (Topana)","category":"Gradina/utvrda","period":"Srednji vijek",
+        "importance":5,"confidence":"high",
+        "why":"Kontrola prijelaza i dominacija nad poljem; višeslojni lokalitet.",
+        "desc":"Utvrda iznad Modrog jezera; očekivani nalazi: keramika, metalni okovi, strelice.",
+        "evidence":"Vidljivi ostaci + povijesne isprave","source":"opći pov. zapisi",
+        "next_steps":"3D fotogrametrija zidina; pregled terasa i urušenih linija."
+      }
     },
-    { "type":"Feature",
-      "geometry":{"type":"Point","coordinates":[17.20110,43.44680]},
-      "properties":{"name":"Kula stražara","category":"Kula/stražara","period":"Osmansko razdoblje","desc":"Stražarska točka na prijelazu.","src":""}
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.25500,43.46200]},
+      "properties":{
+        "id":"im-kamenmost","name":"Kamenmost – povijesni prijelaz","category":"Most/Prijelaz","period":"Srednji vijek / Novovjekovno",
+        "importance":5,"confidence":"high",
+        "why":"Ključni prijelaz; prometna ‘uska grla’ generiraju nalaze.","desc":"Mogući tragovi potkova, novca, olovnih kugli.",
+        "evidence":"Tradicija, karte, morfologija korita","source":"karte + lokalna predaja",
+        "next_steps":"Pješački transekti uz obale; magnetometrija terasa."
+      }
     },
-    { "type":"Feature",
-      "geometry":{"type":"Point","coordinates":[17.23080,43.44190]},
-      "properties":{"name":"Legenda o hajducima","category":"Legenda/Hajduci","period":"Habsburško razdoblje","desc":"Predaja o zasjedi.","src":"https://example.com"}
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.18800,43.43600]},
+      "properties":{
+        "id":"zm-stecci","name":"Nekropola stećaka – Zmijavci (zona)","category":"Stećci","period":"Srednji vijek",
+        "importance":4,"confidence":"high",
+        "why":"Poznata zona stećaka; rubovi mogu skrivati tumule.",
+        "desc":"Ploče i sanduci; motivi križeva, mačeva.","evidence":"Specijalistička literatura",
+        "source":"radovi o stećcima","next_steps":"Geolocirati sve primjerke, 3D snimanje."
+      }
+    },
+
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.23080,43.44910]},
+      "properties":{
+        "id":"im-zasjeda-1","name":"Zasjeda nad prilazom Imotskom","category":"Događaj (zasjeda)","period":"17.–18. st.",
+        "importance":3,"confidence":"medium",
+        "why":"Usmeni izvori o napadima na prilazima; terenska logika.",
+        "desc":"Vrhovi iznad staze pogodni za promatranje i diverziju.",
+        "evidence":"Usmena predaja + taktička pogodnost","source":"lokalne priče",
+        "next_steps":"Tražiti suhozidne zaklone; tragove ognjišta; metalna sitnica."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.22180,43.43240]},
+      "properties":{
+        "id":"im-spilja-1","name":"Špilja ‘pod stijenom’ – sklonište","category":"Špilja/Sklonište","period":"Višeslojno",
+        "importance":4,"confidence":"medium",
+        "why":"Plitka špilja uz staru stazu; tipično za hajdučka skrovišta.",
+        "desc":"Čađavi stropovi, kost, staklo/metal novijeg doba.","evidence":"Vizualno + analogije",
+        "source":"terenska logika","next_steps":"Sito 2×2 m; uzorkovanje čađe/pepela."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.20590,43.39280]},
+      "properties":{
+        "id":"ru-tumuli-1","name":"Runovići – tumuli uz rub polja","category":"Tumuli/Gomile","period":"Prapovijest",
+        "importance":3,"confidence":"medium",
+        "why":"Rubovi polja klasična mjesta gomila.","desc":"Kružna uzvišenja s kamenjem; moguća oštećenja oranjem.",
+        "evidence":"Vizualna analiza, toponimija","source":"toponimi/ortofoto",
+        "next_steps":"GPS kružnice; jezgre uz rub bez oštećivanja."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.24420,43.48520]},
+      "properties":{
+        "id":"vg-straza-1","name":"Vinjani Gornji – stražarska kosa","category":"Stražara/vidikovac","period":"Granično doba",
+        "importance":4,"confidence":"medium",
+        "why":"Granični greben, dobar pogled; signalizacija i straže.",
+        "desc":"Mogući ugljenisani tragovi; olovni projektili.","evidence":"Pov. kontekst granice + topografija",
+        "source":"pov. karte","next_steps":"Sken grebena; detekcija (uz dozvole); ^14C ugljena."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.27050,43.51460]},
+      "properties":{
+        "id":"gr-posusje-1","name":"Granična staza prema Posušju – zasjede","category":"Događaj (zasjeda)","period":"17.–18. st.",
+        "importance":4,"confidence":"medium",
+        "why":"Uske doline i prijelazi – karavanski smjerovi.",
+        "desc":"Očekuj novac, gumbi, kuglice; trag ognja.","evidence":"Usmena predaja + reljef",
+        "source":"lokalna tradicija","next_steps":"Trase po izohipsama; zavjetrine pod stijenama."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.23380,43.37500]},
+      "properties":{
+        "id":"pb-gomila-1","name":"Podbablje – gomila ‘na Vrelu’","category":"Tumuli/Gomile","period":"Prapovijest",
+        "importance":2,"confidence":"low",
+        "why":"Toponim ‘gomila’; rub terase uz vodu.","desc":"Nisko kružno uzvišenje; moguća reciklaža kamena.",
+        "evidence":"Toponimija","source":"lokalni toponim",
+        "next_steps":"GPS krug, foto pod kosim svjetlom."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.20510,43.52140]},
+      "properties":{
+        "id":"vg-signal-1","name":"‘Ognjišta’ – signalna točka (hip.)","category":"Signal/ognjište","period":"Granično doba",
+        "importance":2,"confidence":"low",
+        "why":"Vidikovac naspram Posuškog polja; signalni niz.",
+        "desc":"Ugljenisana mjesta, troska.","evidence":"Analogije mreža signala",
+        "source":"analogija","next_steps":"^14C ugljena; optička prospekcija noću."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.17200,43.50850]},
+      "properties":{
+        "id":"cr-crkvina-1","name":"Crkvina – ranokršćanski horizont (hip.)","category":"Sakralno","period":"Kasna antika / rani srednji vijek",
+        "importance":3,"confidence":"low",
+        "why":"Toponim ‘Crkvina’ često skriva ranije sakralne objekte.",
+        "desc":"Ravni plato; ulomci vapnenca/tegula.","evidence":"Toponimija + analogije",
+        "source":"toponim","next_steps":"Fieldwalking nakon košnje; prosijavanje."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.15120,43.46630]},
+      "properties":{
+        "id":"st-zeljeznik-1","name":"Stari put prema Cisti – zasjeda ‘na brani’","category":"Događaj (zasjeda)","period":"Novi vijek",
+        "importance":3,"confidence":"medium",
+        "why":"Uski klanac; nadzor nad kolonom.",
+        "desc":"Mogući olovni projektili, potkove, okovi tovara.","evidence":"Reljef i pov. smjer",
+        "source":"karte + tradicija","next_steps":"Segmentirati suženja; prioritetna scan točke."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.23000,43.45990]},
+      "properties":{
+        "id":"im-jaruga-1","name":"Mostić preko jaruge – usko grlo","category":"Događaj (zasjeda)","period":"17.–18. st.",
+        "importance":4,"confidence":"medium",
+        "why":"Prirodna klopka na uskom prijelazu.",
+        "desc":"Olovne kuglice, gumbi, trag ognja.","evidence":"Taktička topografija",
+        "source":"terenska logika","next_steps":"Detekcija 30 m uz/nizvodno; uzorci pepela."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.17330,43.52040]},
+      "properties":{
+        "id":"gm-tri-brata","name":"Gomila ‘za tri brata’ (predaja)","category":"Tumuli/Gomile","period":"Prapovijest",
+        "importance":2,"confidence":"low",
+        "why":"Predaja ‘naseljava’ stare gomile novim pričama.",
+        "desc":"Prstenasti nasip; sekundarne jame.","evidence":"Usmena predaja + morfologija",
+        "source":"lokalna priča","next_steps":"Dokumentirati sekundarne ureze; mikrosonde."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.28110,43.45720]},
+      "properties":{
+        "id":"gr-carinarnica-1","name":"‘Carinarnica’ – improv. punkt (hip.)","category":"Kontrola putova","period":"Granično doba",
+        "importance":3,"confidence":"low",
+        "why":"Mjesto za ‘mitu’/carinu; kontrola rute.",
+        "desc":"Keramika, metalne plombice, olovo.","evidence":"Funkcionalna mreža",
+        "source":"analiza","next_steps":"Potvrditi u pisanim izvorima; teren."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.20830,43.41810]},
+      "properties":{
+        "id":"im-brazda-1","name":"Stari mostić – kolna brazda","category":"Most/Prijelaz","period":"Srednji vijek / Novovjekovno",
+        "importance":3,"confidence":"medium",
+        "why":"Uska kolna brazda u kamenu = duga upotreba.",
+        "desc":"Okovi kotača, čavli, potkove.","evidence":"Vizualni trag + stare karte",
+        "source":"karte + teren","next_steps":"3D sken brazde; datacija tipa čavla."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.19610,43.51010]},
+      "properties":{
+        "id":"vg-pojilo-1","name":"Pojilo – sastanak stočara i karavana","category":"Logistika","period":"Novi vijek",
+        "importance":2,"confidence":"low",
+        "why":"Mjesto visoke interakcije = nalazni potencijal.",
+        "desc":"Sitne kovanice, kopče, prsteni.","evidence":"Funkcionalna logika",
+        "source":"analogija","next_steps":"Fieldwalking nakon kiše."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.16740,43.41830]},
+      "properties":{
+        "id":"gm-prevoj-1","name":"Gomila na prevoju iznad Kamenmosta","category":"Tumuli/Gomile","period":"Prapovijest",
+        "importance":3,"confidence":"medium",
+        "why":"Klasična pozicija gomile na prijelazu grebena.",
+        "desc":"Kamen u prstenovima; sekundarne pljačke moguće.","evidence":"Morfološki uzorak",
+        "source":"vizualna analiza","next_steps":"Hillshade; mjerenje profila."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.22300,43.47160]},
+      "properties":{
+        "id":"im-gumno-1","name":"‘Ograđeno gumno’ – sekundarna gradina","category":"Gradina","period":"Prapovijest → Novi vijek",
+        "importance":3,"confidence":"medium",
+        "why":"Prap. gradine često pretvorene u gumna/torove.",
+        "desc":"Suhozidni prsten; zbijena zemlja.","evidence":"Analogija + teren",
+        "source":"analiza","next_steps":"Dokumentirati faze; reciklirani kamen."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.24780,43.38860]},
+      "properties":{
+        "id":"skr-zasjek-1","name":"Skriveni zasjek – ‘noćni prijelaz’","category":"Ruta/Prijelaz","period":"Granično doba",
+        "importance":3,"confidence":"low",
+        "why":"Skriven prolaz kroz šikaru; izbjegavanje straže.",
+        "desc":"Minimalni tragovi; ogrebane stijene.","evidence":"Taktička logika",
+        "source":"analiza","next_steps":"Pješke; tražiti tragove klizanja/ogrebotina."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.14080,43.48240]},
+      "properties":{
+        "id":"sig-zvizda-1","name":"‘Stražarska zvizda’ – signalna linija","category":"Signal/ognjište","period":"Granično doba",
+        "importance":2,"confidence":"low",
+        "why":"Geometrijski zatvara liniju vidljivosti s Topanom.",
+        "desc":"Zažarena zemlja/ugljični tragovi u tankom sloju.","evidence":"Analiza vidljivosti",
+        "source":"analiza","next_steps":"Test linija vidljivosti; ^14C."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.20030,43.42010]},
+      "properties":{
+        "id":"ru-kula-1","name":"Osmanska kula – Runovići (jug)","category":"Stražara/vidikovac","period":"Osmansko razdoblje",
+        "importance":3,"confidence":"medium",
+        "why":"Četverokutne kule za vizualni nadzor polja.",
+        "desc":"Ostaci temelja; reciklirani kamen.","evidence":"Analogije mreže kula",
+        "source":"karte/toponimi","next_steps":"Lidar/sjenčanje; bazno snimanje."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.24780,43.48710]},
+      "properties":{
+        "id":"hb-medjas-1","name":"Habsburški međaš – kameni križ","category":"Granični kamen","period":"Habsburško razdoblje",
+        "importance":3,"confidence":"medium",
+        "why":"Uklesani znak potvrđuje trasu granice.","desc":"U zemlji ili prevrnut; vrijedan marker.",
+        "evidence":"Karte + toponimi ‘međaš’","source":"karte/toponimi",
+        "next_steps":"Lagano sondiranje; fotogrametrija uklesa."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.18350,43.45530]},
+      "properties":{
+        "id":"im-rani-1","name":"Imotski – ‘Gospin dolac’ (rani slojevi?)","category":"Rani slojevi","period":"Antika",
+        "importance":3,"confidence":"low",
+        "why":"Rubne terase čuvaju najstariji sloj naselja.",
+        "desc":"Keramika, tegule, sitan metal.","evidence":"Opći uzorak prstena naselja",
+        "source":"analogija","next_steps":"Transekti; prosijavanje mikrolokacija."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.20540,43.43640]},
+      "properties":{
+        "id":"zm-stecci-2","name":"Zmijavci – druga skupina stećaka","category":"Stećci","period":"Srednji vijek",
+        "importance":3,"confidence":"medium",
+        "why":"Raspršeni primjerci izvan glavne skupine.","desc":"Ploče, sanduci; možda i križni znakovi.",
+        "evidence":"Lokalna opažanja","source":"terenska zapažanja",
+        "next_steps":"Precizna karta; 3D modeliranje."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.21090,43.43080]},
+      "properties":{
+        "id":"ru-antika-1","name":"Runovići – rimski trag (opća zona)","category":"Antika","period":"Rimsko doba",
+        "importance":3,"confidence":"medium",
+        "why":"Rasuti tegulae i amfore; trag komunikacije.",
+        "desc":"Ulomci keramike; cigla; metalni okovi.","evidence":"Površinska opažanja",
+        "source":"analogija + zabilješke","next_steps":"Precizno mapiranje nalaza."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.13250,43.49680]},
+      "properties":{
+        "id":"ri-gradina-1","name":"Ričice – gradina nad izvorištem","category":"Gradina","period":"Prapovijest / Antika",
+        "importance":3,"confidence":"medium",
+        "why":"Kontrola izvora i putova prema sjeveru.","desc":"Zatravljeni valjci; urušeni bedemi.",
+        "evidence":"Morfologija + analogije","source":"terenska analogija",
+        "next_steps":"Dron snimke u zoru/večer; pregled keramike nakon kiše."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.18180,43.43890]},
+      "properties":{
+        "id":"im-logor-1","name":"Imotsko polje – ‘karavanski logistički punkt’","category":"Logistika","period":"Novi vijek",
+        "importance":2,"confidence":"low",
+        "why":"Mjesta za prepakiravanje i raspremu prije prijelaza.",
+        "desc":"Sitni metal, olovne plombice, staklo/keramika.","evidence":"Funkcionalna logika",
+        "source":"analogija","next_steps":"Razgovori s mještanima; površinski pregled."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.26210,43.40420]},
+      "properties":{
+        "id":"sp-nisa-1","name":"Špiljska niša – ‘hajdučki panj’ (predaja)","category":"Špilja/Sklonište","period":"17.–19. st.",
+        "importance":3,"confidence":"low",
+        "why":"Predaja o zimskom skloništu skupine.","desc":"Čađa, kost, komadi tekstila/kopče.",
+        "evidence":"Usmena predaja","source":"lokalne priče",
+        "next_steps":"Endoskopska kamera; prosijavanje prednjeg dijela."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.24110,43.52080]},
+      "properties":{
+        "id":"st-posusje-1","name":"Stari prijelaz u Posušje – tržišni dani","category":"Ruta/Prijelaz","period":"Novi vijek",
+        "importance":3,"confidence":"medium",
+        "why":"Pojačan promet = veća šansa za rasute nalaze.",
+        "desc":"Novci niskih nominala, gumbi, okovi remena.","evidence":"Tradicija kretanja",
+        "source":"lokalna predaja","next_steps":"Fieldwalking poslije kiše; detektor (dozvole)."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.14770,43.43670]},
+      "properties":{
+        "id":"im-hrast-1","name":"‘Zaklon ispod hrasta’ – karavanska točka","category":"Sklonište/logistika","period":"Novi vijek",
+        "importance":2,"confidence":"low",
+        "why":"Stablo-orijentir; zaklonjeno mjesto za predah.",
+        "desc":"Metalna sitnica; trag pepela.","evidence":"Usmena predaja + logika",
+        "source":"lokalne priče","next_steps":"Detektor u radijusu 25 m; sondažno."
+      }
+    },
+    { "type":"Feature","geometry":{"type":"Point","coordinates":[17.27490,43.47050]},
+      "properties":{
+        "id":"gr-medjas-2","name":"Granični međaš – ‘kamen s križem’","category":"Granični kamen","period":"Habsburško razdoblje",
+        "importance":3,"confidence":"medium",
+        "why":"Uklesani znak potvrđuje trasu granice.","desc":"Možda prevrnut; vrijedan marker.",
+        "evidence":"Karte + toponimi ‘međaš’","source":"karte/toponimi",
+        "next_steps":"Sondiranje oko kamena; fotogrametrija uklesa."
+      }
     }
   ]
 }
