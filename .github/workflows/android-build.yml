@@ -13,11 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 11 (compatible with older Android Gradle plugin)
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 11
 
       - name: Install Android SDK
         uses: android-actions/setup-android@v3
@@ -27,7 +27,7 @@ jobs:
           yes | sdkmanager --licenses > /dev/null
           sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
-      - name: Use Gradle 7.6 (compatible)
+      - name: Use Gradle 7.6
         run: |
           wget https://services.gradle.org/distributions/gradle-7.6-bin.zip -O /tmp/gradle-7.6-bin.zip
           unzip -q /tmp/gradle-7.6-bin.zip -d $HOME/gradle
@@ -36,11 +36,8 @@ jobs:
       - name: Grant gradlew permission
         run: chmod +x gradlew || true
 
-      - name: Build Debug APK (save full log)
-        run: |
-          set -o pipefail
-          gradle --version
-          gradle clean assembleDebug --no-daemon --stacktrace --warning-mode all | tee build.log
+      - name: Build Debug APK
+        run: gradle clean assembleDebug --no-daemon --stacktrace | tee build.log
 
       - name: Upload APK
         if: success()
