@@ -19,21 +19,27 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Install Android commandline tools
+      - name: Install Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install SDK packages (silent)
+      - name: Install SDK packages
         run: |
-          echo "y" | sdkmanager --licenses > /dev/null || true
-          sdkmanager --install "platform-tools" "platforms;android-33" "build-tools;33.0.2" >/dev/null || true
+          yes | sdkmanager --licenses > /dev/null
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+
+      - name: Use Gradle 7.6 (compatible)
+        run: |
+          wget https://services.gradle.org/distributions/gradle-7.6-bin.zip -O /tmp/gradle-7.6-bin.zip
+          unzip -q /tmp/gradle-7.6-bin.zip -d $HOME/gradle
+          echo "$HOME/gradle/gradle-7.6/bin" >> $GITHUB_PATH
 
       - name: Grant gradlew permission
-        run: chmod +x gradlew
+        run: chmod +x gradlew || true
 
       - name: Build Debug APK
-        run: ./gradlew clean assembleDebug --stacktrace --no-daemon
+        run: gradle clean assembleDebug --no-daemon --stacktrace
 
-      - name: Upload APK artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: debug-apk
