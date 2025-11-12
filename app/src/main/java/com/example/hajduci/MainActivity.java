@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         s.setAllowFileAccessFromFileURLs(true);
         webView.setWebViewClient(new WebViewClient());
 
-        // Lokalni asset s toolbarom i fallback markerom:
+        // >>> OVO JE KLJUČNO <<<
         webView.loadUrl("file:///android_asset/map.html");
 
         setContentView(webView);

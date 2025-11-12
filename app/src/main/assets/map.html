@@ -1,118 +1,75 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Hajduk – Arheološke i hajdučke točke</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <style>
-    html, body, #map { height:100%; margin:0; }
-    .toolbar {
-      position: fixed; z-index: 1000; top: 8px; left: 8px;
-      background: #ffffff; padding: 8px 10px; border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.25);
-      font-family: system-ui, sans-serif; font-size: 14px;
-    }
-    .badge { display:inline-block; margin-left:8px; padding:2px 6px; background:#222; color:#fff; border-radius:6px; font-size:12px; }
-  </style>
-</head>
-<body>
-  <div class="toolbar">
-    <b>Hajduk karta</b> <span class="badge" id="status">HTML učitan</span><br/>
-    Kategorija:
-    <select id="cat">
-      <option value="sve">Sve</option>
-      <option value="hajduk">Hajduk</option>
-      <option value="arheo">Arheologija</option>
-    </select>
-    &nbsp; Period:
-    <select id="period">
-      <option value="svi">Svi</option>
-      <option value="prapovijest">Prapovijest</option>
-      <option value="antika">Antika</option>
-      <option value="srednji_vijek">Srednji vijek</option>
-      <option value="osmansko">Osmansko</option>
-      <option value="habsburško">Habsburško</option>
-    </select>
-  </div>
-  <div id="map"></div>
+<!DOCTYPE html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Hajduk – karta</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<style>
+  html,body,#map{height:100%;margin:0}
+  .toolbar{position:fixed;z-index:1000;top:8px;left:8px;background:#fff;padding:8px 10px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.25);font:14px system-ui,sans-serif}
+  .badge{display:inline-block;margin-left:8px;padding:2px 6px;background:#222;color:#fff;border-radius:6px;font-size:12px}
+</style>
+</head><body>
+<div class="toolbar">
+  <b>Hajduk karta</b> <span class="badge" id="status">HTML</span><br/>
+  Kategorija:
+  <select id="cat">
+    <option value="sve">Sve</option>
+    <option value="hajduk">Hajduk</option>
+    <option value="arheo">Arheologija</option>
+  </select>
+  &nbsp;Period:
+  <select id="period">
+    <option value="svi">Svi</option>
+    <option value="prapovijest">Prapovijest</option>
+    <option value="antika">Antika</option>
+    <option value="srednji_vijek">Srednji vijek</option>
+    <option value="osmansko">Osmansko</option>
+    <option value="habsburško">Habsburško</option>
+  </select>
+</div>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  const map=L.map('map').setView([43.4467,17.2169],11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    const map = L.map('map').setView([43.4467, 17.2169], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19, attribution: '© OpenStreetMap'
+  const fb=L.circleMarker([43.4467,17.2169],{radius:8,color:'#444',fillColor:'#999',fillOpacity:.7})
+    .bindPopup('Aplikacija radi. Čekam sites.geojson...').addTo(map);
+
+  let layer=null, DATA=null;
+  const catSel=document.getElementById('cat'), perSel=document.getElementById('period'), status=document.getElementById('status');
+
+  function color(cat){return cat==='hajduk'?'#d32f2f':'#1565c0'}
+  function render(){
+    if(!DATA) return;
+    if(layer) map.removeLayer(layer);
+    const cat=catSel.value, per=perSel.value;
+    const feats=DATA.features.filter(f=>{
+      const p=f.properties||{};
+      const okC=(cat==='sve')||p.category===cat;
+      const okP=(per==='svi')||p.period===per;
+      return okC&&okP;
+    });
+    layer=L.geoJSON({type:'FeatureCollection',features:feats},{
+      pointToLayer:(f,latlng)=>L.circleMarker(latlng,{radius:7,color:color((f.properties||{}).category),weight:2,fillColor:color((f.properties||{}).category),fillOpacity:.8}),
+      onEachFeature:(f,l)=>{
+        const p=f.properties||{};
+        const src=p.sources?`<br/><small><a target="_blank" href="${p.sources}">Izvor</a></small>`:'';
+        l.bindPopup(`<b>${p.name||'Nepoznato'}</b><br/>${p.story||p.desc||''}${src}`);
+      }
     }).addTo(map);
+    if(feats.length){const b=layer.getBounds(); if(b.isValid()) map.fitBounds(b.pad(.2));}
+  }
+  catSel.onchange=render; perSel.onchange=render;
 
-    // Fallback marker (da sigurno vidiš barem nešto ako GeoJSON ne učita)
-    const fallback = L.circleMarker([43.4467, 17.2169], {radius:8, color:'#444', fillColor:'#999', fillOpacity:0.7})
-      .bindPopup('Aplikacija radi. Čekam sites.geojson...')
-      .addTo(map);
-
-    let layer = null;
-    const periodSel = document.getElementById('period');
-    const catSel = document.getElementById('cat');
-    const statusEl = document.getElementById('status');
-
-    function colorForCategory(cat) {
-      return cat === 'hajduk' ? '#d32f2f' : '#1565c0'; // crvena / plava
+  (async ()=>{
+    status.textContent='Učitavam točke...';
+    try{
+      const r=await fetch('sites.geojson'); if(!r.ok) throw new Error('HTTP '+r.status);
+      DATA=await r.json(); render(); status.textContent='Točke učitane';
+      try{map.removeLayer(fb);}catch(e){}
+    }catch(e){
+      console.error(e); status.textContent='Greška: sites.geojson'; alert('Nema sites.geojson. Stavili smo fallback marker.');
     }
-
-    function render(data) {
-      if (layer) map.removeLayer(layer);
-      const cat = catSel.value;
-      const per = periodSel.value;
-
-      const feats = data.features.filter(f => {
-        const p = f.properties || {};
-        const okCat = (cat === 'sve') ? true : (p.category === cat);
-        const okPer = (per === 'svi') ? true : (p.period === per);
-        return okCat && okPer;
-      });
-
-      layer = L.geoJSON({ type:'FeatureCollection', features: feats }, {
-        pointToLayer: (f, latlng) => {
-          const c = colorForCategory((f.properties||{}).category);
-          return L.circleMarker(latlng, {
-            radius: 7, color: c, weight: 2, fillColor: c, fillOpacity: 0.8
-          });
-        },
-        onEachFeature: (f, l) => {
-          const p = f.properties || {};
-          const desc = p.story || p.desc || '';
-          const src = p.sources ? `<br/><small><a target="_blank" href="${p.sources}">Izvor</a></small>` : '';
-          l.bindPopup(`<b>${p.name || 'Nepoznato'}</b><br/>${desc}${src}`);
-        }
-      }).addTo(map);
-
-      if (feats.length) {
-        const b = layer.getBounds();
-        if (b.isValid()) map.fitBounds(b.pad(0.2));
-      }
-    }
-
-    async function load() {
-      statusEl.textContent = 'Učitavam točke...';
-      try {
-        const resp = await fetch('sites.geojson');
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        const data = await resp.json();
-        render(data);
-        statusEl.textContent = 'Točke učitane';
-        // ukloni fallback kad imamo podatke
-        try { map.removeLayer(fallback); } catch(e){}
-      } catch (e) {
-        statusEl.textContent = 'Greška: sites.geojson';
-        console.error('sites.geojson ERROR:', e);
-        alert('Ne mogu učitati sites.geojson (asset). Provjeri da je u app/src/main/assets/sites.geojson');
-      }
-    }
-
-    periodSel.onchange = () => (window.DATA ? render(window.DATA) : null);
-    catSel.onchange = () => (window.DATA ? render(window.DATA) : null);
-
-    // Učitaj geojson
-    load();
-  </script>
-</body>
-</html>
+  })();
+</script>
+</body></html>
