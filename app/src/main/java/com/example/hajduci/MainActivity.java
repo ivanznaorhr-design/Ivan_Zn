@@ -14,14 +14,16 @@ public class MainActivity extends AppCompatActivity {
         WebView webView = new WebView(this);
         WebSettings s = webView.getSettings();
         s.setJavaScriptEnabled(true);
-        s.setDomStorageEnabled(true);      // za fetch i localStorage
+        s.setDomStorageEnabled(true);
         s.setAllowFileAccess(true);
         s.setAllowContentAccess(true);
         s.setAllowUniversalAccessFromFileURLs(true);
         s.setAllowFileAccessFromFileURLs(true);
-
         webView.setWebViewClient(new WebViewClient());
+
+        // Lokalni asset s toolbarom i fallback markerom:
         webView.loadUrl("file:///android_asset/map.html");
+
         setContentView(webView);
     }
 }

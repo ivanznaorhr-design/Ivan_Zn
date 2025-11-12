@@ -9,14 +9,16 @@
     html, body, #map { height:100%; margin:0; }
     .toolbar {
       position: fixed; z-index: 1000; top: 8px; left: 8px;
-      background: #fff; padding: 6px 8px; border-radius: 8px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.25); font-family: system-ui, sans-serif;
+      background: #ffffff; padding: 8px 10px; border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.25);
+      font-family: system-ui, sans-serif; font-size: 14px;
     }
-    select { font-size: 14px; }
+    .badge { display:inline-block; margin-left:8px; padding:2px 6px; background:#222; color:#fff; border-radius:6px; font-size:12px; }
   </style>
 </head>
 <body>
   <div class="toolbar">
+    <b>Hajduk karta</b> <span class="badge" id="status">HTML učitan</span><br/>
     Kategorija:
     <select id="cat">
       <option value="sve">Sve</option>
@@ -30,7 +32,7 @@
       <option value="antika">Antika</option>
       <option value="srednji_vijek">Srednji vijek</option>
       <option value="osmansko">Osmansko</option>
-      <option value="habsbursko">Habsburško</option>
+      <option value="habsburško">Habsburško</option>
     </select>
   </div>
   <div id="map"></div>
@@ -42,9 +44,15 @@
       maxZoom: 19, attribution: '© OpenStreetMap'
     }).addTo(map);
 
+    // Fallback marker (da sigurno vidiš barem nešto ako GeoJSON ne učita)
+    const fallback = L.circleMarker([43.4467, 17.2169], {radius:8, color:'#444', fillColor:'#999', fillOpacity:0.7})
+      .bindPopup('Aplikacija radi. Čekam sites.geojson...')
+      .addTo(map);
+
     let layer = null;
     const periodSel = document.getElementById('period');
     const catSel = document.getElementById('cat');
+    const statusEl = document.getElementById('status');
 
     function colorForCategory(cat) {
       return cat === 'hajduk' ? '#d32f2f' : '#1565c0'; // crvena / plava
@@ -66,7 +74,7 @@
         pointToLayer: (f, latlng) => {
           const c = colorForCategory((f.properties||{}).category);
           return L.circleMarker(latlng, {
-            radius: 7, color: c, weight: 2, fillColor: c, fillOpacity: 0.7
+            radius: 7, color: c, weight: 2, fillColor: c, fillOpacity: 0.8
           });
         },
         onEachFeature: (f, l) => {
@@ -83,15 +91,27 @@
       }
     }
 
-    let DATA = null;
     async function load() {
-      const resp = await fetch('sites.geojson');
-      DATA = await resp.json();
-      render(DATA);
+      statusEl.textContent = 'Učitavam točke...';
+      try {
+        const resp = await fetch('sites.geojson');
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        const data = await resp.json();
+        render(data);
+        statusEl.textContent = 'Točke učitane';
+        // ukloni fallback kad imamo podatke
+        try { map.removeLayer(fallback); } catch(e){}
+      } catch (e) {
+        statusEl.textContent = 'Greška: sites.geojson';
+        console.error('sites.geojson ERROR:', e);
+        alert('Ne mogu učitati sites.geojson (asset). Provjeri da je u app/src/main/assets/sites.geojson');
+      }
     }
 
-    periodSel.onchange = () => render(DATA);
-    catSel.onchange = () => render(DATA);
+    periodSel.onchange = () => (window.DATA ? render(window.DATA) : null);
+    catSel.onchange = () => (window.DATA ? render(window.DATA) : null);
+
+    // Učitaj geojson
     load();
   </script>
 </body>
