@@ -2,8 +2,7 @@
 <html lang="hr">
 <head>
   <meta charset="utf-8">
-  <title>Hajduci – test karta</title>
-
+  <title>Hajduci – karta</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Leaflet CSS -->
@@ -25,10 +24,54 @@
       width: 100%;
       height: 100%;
     }
+
+    /* Zoom tipke dolje lijevo */
+    .leaflet-control-zoom {
+      position: absolute !important;
+      left: 10px !important;
+      bottom: 40px !important;
+      top: auto !important;
+      z-index: 1000;
+    }
+
+    /* Legenda preko mape, dolje desno */
+    .legend-overlay {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      background: rgba(255,255,255,0.9);
+      padding: 8px 10px;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      font-size: 12px;
+      line-height: 1.4;
+      z-index: 1000;
+    }
+    .legend-overlay b {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
+
+  <!-- Legenda -->
+  <div id="legend" class="legend-overlay">
+    <b>Legenda</b>
+    <div><span class="legend-dot" style="background:#d91e18;"></span>Gradine / utvrde</div>
+    <div><span class="legend-dot" style="background:#e74c3c;"></span>Bitke / zasjede</div>
+    <div><span class="legend-dot" style="background:#e67e22;"></span>Karavanski punktovi / logistika</div>
+    <div><span class="legend-dot" style="background:#9b59b6;"></span>Stećci / nekropole</div>
+    <div><span class="legend-dot" style="background:#3498db;"></span>Rimski putevi / mostovi / vile</div>
+  </div>
 
   <!-- Leaflet JS -->
   <script
@@ -38,17 +81,16 @@
   </script>
 
   <script>
-    // Kad se stranica učita, inicijaliziraj kartu
     (function () {
+      // Osnovna karta
       var map = L.map('map').setView([43.45, 17.20], 9);
 
-      // OSM podloga
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap suradnici'
       }).addTo(map);
 
-      // Učitavanje lokacija iz sites.geojson (mora biti u istom web/ folderu)
+      // Učitavanje točaka
       fetch('sites.geojson')
         .then(function (r) { return r.json(); })
         .then(function (data) {
@@ -71,9 +113,7 @@
 
           try {
             map.fitBounds(layer.getBounds());
-          } catch (e) {
-            // ako je samo jedna točka ili nijedna
-          }
+          } catch (e) {}
         })
         .catch(function (err) {
           console.error('Greška pri učitavanju sites.geojson:', err);
