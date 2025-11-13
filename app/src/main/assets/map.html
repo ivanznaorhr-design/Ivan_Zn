@@ -251,8 +251,7 @@
   async function loadData(){
     statusEl.textContent='Učitavam točke…';
     try{
-      const r=await fetch('sites.geojson');
-      ALL=await r.json();
+const r = await fetch('sites.geojson?v=' + Date.now(), { cache: 'no-store' });      ALL=await r.json();
       statusEl.textContent='Točke učitane.'; render();
     }catch(e){
       console.error(e); statusEl.textContent='Nema sites.geojson – demo točka.';
