@@ -83,8 +83,8 @@
   <script>
     (function () {
       // Osnovna karta
-      var map = L.map('map').setView([43.45, 17.20], 9);
-
+var map = L.map('map', { zoomControl: false }).setView([43.45, 17.20], 9);
+L.control.zoom({ position: 'bottomleft' }).addTo(map);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap suradnici'
