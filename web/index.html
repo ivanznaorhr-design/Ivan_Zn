@@ -14,50 +14,85 @@
   />
 
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-    }
-    #map {
-      width: 100%;
-      height: 100%;
-    }
+<style>
+  html, body, #map {
+    height: 100%;
+    margin: 0;
+  }
 
-    /* Zoom tipke dolje lijevo */
-    .leaflet-control-zoom {
-      position: absolute !important;
-      left: 10px !important;
-      bottom: 40px !important;
-      top: auto !important;
-      z-index: 1000;
-    }
+  /* GORNJI TOOLBAR – lijep, kompaktan */
+  .toolbar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.96);
+    padding: 6px 10px;
+    z-index: 950;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+  }
 
-    /* Legenda preko mape, dolje desno */
-    .legend-overlay {
-      position: absolute;
-      right: 10px;
-      bottom: 10px;
-      background: rgba(255,255,255,0.9);
-      padding: 8px 10px;
-      border-radius: 6px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-      font-size: 12px;
-      line-height: 1.4;
-      z-index: 1000;
-    }
-    .legend-overlay b {
-      display: block;
-      margin-bottom: 4px;
-    }
-    .legend-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-right: 4px;
-    }
+  .toolbar-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .toolbar-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    align-items: center;
+  }
+
+  .toolbar-row label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .toolbar-row select,
+  .toolbar-row input {
+    font-size: 14px;
+    padding: 2px 4px;
+  }
+
+  .toolbar-row input {
+    min-width: 140px;
+  }
+
+  /* ZOOM – dolje lijevo, potpuno vidljiv, iznad legende */
+  .leaflet-control-zoom {
+    position: absolute !important;
+    left: 10px !important;
+    bottom: 90px !important;  /* dižemo ga da ne upada u rub ekrana */
+    z-index: 900;
+  }
+
+  /* LEGENDA – dolje desno preko karte */
+  .legend-overlay {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    z-index: 950;
+  }
+
+  .legend-overlay .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+</style>
   </style>
 </head>
 <body>
@@ -95,6 +130,38 @@
           <option value="Granični kamen">Granica / međaš</option>
         </select>
       </label>
+
+<div class="toolbar-row">
+  <label>
+    Razdoblje:
+    <select id="periodFilter">
+      <option value="">Sva</option>
+      <option value="Prapovijest">Prapovijest</option>
+      <option value="Antika">Antika</option>
+      <option value="Rani srednji vijek">Rani srednji vijek</option>
+      <option value="Srednji vijek">Srednji vijek</option>
+      <option value="Osmansko razdoblje">Osmansko razdoblje</option>
+      <option value="Mletačko razdoblje">Mletačko razdoblje</option>
+      <option value="Novi vijek">Novi vijek</option>
+    </select>
+  </label>
+
+  <label>
+    Kategorija:
+    <select id="categoryFilter">
+      <option value="">Sve</option>
+      <option value="Gradina">Gradina / utvrda</option>
+      <option value="Utvrda">Tvrđava / grad</option>
+      <option value="Grobni humci">Gomile / tumuli</option>
+      <option value="Stećci">Stećci / nekropole</option>
+    </select>
+  </label>
+
+  <label>
+    Pretraži:
+    <input id="searchFilter" type="text" placeholder="naziv, opis, izvor…" />
+  </label>
+</div>
 
       <label style="flex:1;">
         Pretraži:
