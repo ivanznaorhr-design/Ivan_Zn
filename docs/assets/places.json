@@ -1,0 +1,50 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Modro jezero",
+        "description": "Jedno od najpoznatijih krških jezera u Hrvatskoj. Staza za silazak, legende i ljetno igralište.",
+        "category": "priroda"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2136, 43.4475] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Crveno jezero",
+        "description": "Impresivna krška jama s okomitim liticama. Dubina preko 500 m.",
+        "category": "priroda"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2216, 43.4591] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Tvrđava Topana",
+        "description": "Srednjovjekovna tvrđava iznad Imotskog, pogled na Modro jezero.",
+        "category": "povijest"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2146, 43.4479] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Zvonik crkve sv. Franje",
+        "description": "Prepoznatljiv simbol Imotskog uz glavnu gradsku crkvu.",
+        "category": "kultura"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2131, 43.4467] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Prološko blato",
+        "description": "Zaštićeno močvarno područje – ptice, šetnice, tradicionalni ribolov.",
+        "category": "priroda"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.1797, 43.4597] }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Modro jezero",
+        "description": "<b>Duboko krško jezero</b> u središtu Imotskog. Ljeti se tu igra i nogomet!",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Modro_jezero_Imotski.jpg/640px-Modro_jezero_Imotski.jpg"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2142, 43.4476] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Crveno jezero",
+        "description": "Jedno od najdubljih krških jezera na svijetu – gotovo 500 m dubine!",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Crveno_jezero_Imotski.jpg/640px-Crveno_jezero_Imotski.jpg"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2217, 43.4586] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Tvrđava Topana",
+        "description": "Srednjovjekovna tvrđava iznad Modrog jezera, s pogledom na grad i jezero.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Tvr%C4%91ava_Topana_Imotski.jpg/640px-Tvr%C4%91ava_Topana_Imotski.jpg"
+      },
+      "geometry": { "type": "Point", "coordinates": [17.2139, 43.4481] }
+    }
+  ]
+}
