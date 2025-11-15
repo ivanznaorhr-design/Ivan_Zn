@@ -4,12 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hajduci – karta</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  />
+
+  <!-- Leaflet CSS BEZ integrity -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
     html, body, #map {
       height: 100%;
@@ -172,25 +171,14 @@
     <span class="dot" style="background:#95a5a6"></span> Ostalo / neizvjesno<br/>
   </div>
 
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9coQqIJZRGukZ/29W+K1jvXN1lvTlZBoY3E="
-    crossorigin=""
-  ></script>
+  <!-- Leaflet JS BEZ integrity -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <script>
-    // Init karta
-    const map = L.map('map', { zoomControl: true })
-      .setView([43.4, 17.2], 9);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; OpenStreetMap suradnici'
-    }).addTo(map);
-
-    const statusEl   = document.getElementById('status');
-    const periodSel  = document.getElementById('periodFilter');
-    const catSel     = document.getElementById('categoryFilter');
-    const searchInput= document.getElementById('searchFilter');
+    const statusEl    = document.getElementById('status');
+    const periodSel   = document.getElementById('periodFilter');
+    const catSel      = document.getElementById('categoryFilter');
+    const searchInput = document.getElementById('searchFilter');
 
     const colorByGroup = {
       'Gradine / utvrde'              : '#d91e18',
@@ -206,18 +194,9 @@
       'Ostalo / neizvjesno'           : '#95a5a6'
     };
 
-    let ALL = null;
+    let ALL   = null;
     let LAYER = null;
 
-    function featureKey(f){
-      const p = f.properties || {};
-      if(p.id) return 'site:' + p.id;
-      const g = f.geometry || {};
-      const c = g.coordinates || [0,0];
-      return 'site:' + (p.name || 'noname') + '|' + c[1].toFixed(6) + ',' + c[0].toFixed(6);
-    }
-
-    // Grupiranje kategorija na temelju teksta u p.category
     function featureGroup(p){
       const c = (p.category || p.cat || '').toLowerCase();
 
@@ -267,25 +246,25 @@
     }
 
     function popupHtml(p){
-      const name  = p.name || '(bez naziva)';
-      const period= p.period || '';
-      const group = featureGroup(p);
-      const desc  = p.desc || '';
-      const why   = p.why || '';
-      const evid  = p.evidence || '';
-      const next  = p.next_steps || '';
-      const prob  = p.confidence || p.importance || '';
+      const name   = p.name   || '(bez naziva)';
+      const period = p.period || '';
+      const group  = featureGroup(p);
+      const desc   = p.desc   || '';
+      const why    = p.why    || '';
+      const evid   = p.evidence || '';
+      const next   = p.next_steps || '';
+      const prob   = p.confidence || p.importance || '';
 
-      return `
-        <b>${name}</b><br/>
-        ${period ? `<i>${period}</i><br/>` : ''}
-        ${group ? `<b>Kategorija:</b> ${group}<br/>` : ''}
-        ${desc ? `${desc}<br/>` : ''}
-        ${evid ? `<b>Dokazi:</b> ${evid}<br/>` : ''}
-        ${why  ? `<b>Zašto ovdje:</b> ${why}<br/>` : ''}
-        ${prob ? `<b>Vjerojatnost pronalaska:</b> ${prob}<br/>` : ''}
-        ${next ? `<b>Sljedeći koraci:</b> ${next}` : ''}
-      `;
+      return (
+        '<b>' + name + '</b><br/>' +
+        (period ? '<i>' + period + '</i><br/>' : '') +
+        (group  ? '<b>Kategorija:</b> ' + group + '<br/>' : '') +
+        (desc   ? desc + '<br/>' : '') +
+        (evid   ? '<b>Dokazi:</b> ' + evid + '<br/>' : '') +
+        (why    ? '<b>Zašto ovdje:</b> ' + why + '<br/>' : '') +
+        (prob   ? '<b>Vjerojatnost pronalaska:</b> ' + prob + '<br/>' : '') +
+        (next   ? '<b>Sljedeći koraci:</b> ' + next : '')
+      );
     }
 
     function passFilters(f){
@@ -294,68 +273,83 @@
       const catFilter    = catSel.value || '';
       const text         = (searchInput.value || '').toLowerCase().trim();
 
-      if(periodFilter && (p.period || '') !== periodFilter) return false;
+      if (periodFilter && (p.period || '') !== periodFilter) return false;
 
       const grp = featureGroup(p);
-      if(catFilter && grp !== catFilter) return false;
+      if (catFilter && grp !== catFilter) return false;
 
-      if(text){
+      if (text) {
         const hay = (
           (p.name || '') + ' ' +
           (p.desc || '') + ' ' +
           (p.source || '') + ' ' +
           (p.why || '')
         ).toLowerCase();
-        if(!hay.includes(text)) return false;
+        if (!hay.includes(text)) return false;
       }
       return true;
     }
 
     function render(){
-      if(!ALL) return;
-      if(LAYER) map.removeLayer(LAYER);
+      if (!ALL) return;
+      if (LAYER) {
+        map.removeLayer(LAYER);
+      }
 
       const feats = ALL.features.filter(passFilters);
 
-      LAYER = L.geoJSON({type:'FeatureCollection', features:feats},{
-        pointToLayer: (f, latlng) => {
-          return L.circleMarker(latlng, markerStyle(f.properties || {}));
-        },
-        onEachFeature: (f, layer) => {
-          layer.bindPopup(popupHtml(f.properties || {}));
+      LAYER = L.geoJSON(
+        { type: 'FeatureCollection', features: feats },
+        {
+          pointToLayer: function (f, latlng) {
+            return L.circleMarker(latlng, markerStyle(f.properties || {}));
+          },
+          onEachFeature: function (f, layer) {
+            layer.bindPopup(popupHtml(f.properties || {}));
+          }
         }
-      }).addTo(map);
+      ).addTo(map);
 
-      if(feats.length){
-        try{
-          map.fitBounds(LAYER.getBounds(), {padding:[40,40]});
-        }catch(e){}
+      if (feats.length) {
+        try {
+          map.fitBounds(LAYER.getBounds(), { padding: [40, 40] });
+        } catch (e) {}
       }
 
-      const total = ALL.features.length;
-      statusEl.textContent = `Točaka (filter): ${feats.length} / ${total}`;
+      var total = ALL.features.length;
+      statusEl.textContent = 'Točaka (filter): ' + feats.length + ' / ' + total;
     }
 
     function attachHandlers(){
       periodSel.addEventListener('change', render);
       catSel.addEventListener('change', render);
-      searchInput.addEventListener('input', () => {
+      searchInput.addEventListener('input', function () {
         clearTimeout(window.__searchTimer);
         window.__searchTimer = setTimeout(render, 200);
       });
     }
 
-    async function loadData(){
+    // inicijalizacija karte + učitavanje podataka
+    var map = L.map('map', { zoomControl: true }).setView([43.4, 17.2], 9);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap suradnici'
+    }).addTo(map);
+
+    function loadData(){
       statusEl.textContent = 'Učitavam točke…';
-      try{
-        const r = await fetch('sites.geojson?v=' + Date.now());
-        ALL = await r.json();
-        attachHandlers();
-        render();
-      }catch(e){
-        console.error(e);
-        statusEl.textContent = 'Greška pri učitavanju točaka.';
-      }
+      fetch('sites.geojson?v=' + Date.now())
+        .then(function (r){ return r.json(); })
+        .then(function (json){
+          ALL = json;
+          attachHandlers();
+          render();
+        })
+        .catch(function (e){
+          console.log(e);
+          statusEl.textContent = 'Greška pri učitavanju točaka.';
+        });
     }
 
     loadData();
