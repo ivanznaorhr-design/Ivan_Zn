@@ -64,7 +64,6 @@
       font-size: 13px;
     }
 
-    /* širine polja – period + kategorija uži, search širi */
     .toolbar-row label.period,
     .toolbar-row label.category {
       flex: 0 0 42%;
@@ -92,7 +91,6 @@
       white-space: nowrap;
     }
 
-    /* Na širim ekranima prelom malo drugačije */
     @media (min-width: 640px) {
       .toolbar-row label.period,
       .toolbar-row label.category {
@@ -214,7 +212,7 @@
     const catSel      = document.getElementById('categoryFilter');
     const searchInput = document.getElementById('searchFilter');
 
-    // Boje po kategorijama – iste kao u legendi
+    // Boje po GRUPAMA kategorija (5 grupa iz legende)
     const CATEGORY_COLORS = {
       'Gradine / utvrde': '#e74c3c',
       'Bitke / zasjede': '#f39c12',
@@ -223,15 +221,69 @@
       'Rimski putevi / mostovi / vile': '#2ecc71'
     };
 
-    function markerStyle(category) {
-      const color = CATEGORY_COLORS[category] || '#34495e'; // fallback siva
+    // Mapiraj originalni tekst kategorije u jednu od 5 grupa
+    function categoryGroup(cat) {
+      if (!cat) return null;
+      const c = cat.toLowerCase();
+
+      // gradine, utvrde, kule...
+      if (c.includes('gradina') || c.includes('utvr') || c.includes('tvrđ') || c.includes('kula')) {
+        return 'Gradine / utvrde';
+      }
+
+      // bitke, zasjede, pohodi...
+      if (c.includes('bitk') || c.includes('boj') || c.includes('zasjed')) {
+        return 'Bitke / zasjede';
+      }
+
+      // karavane, logor, logističke točke, špilje/pećine kao skloništa...
+      if (
+        c.includes('karavan') ||
+        c.includes('logist') ||
+        c.includes('han') ||
+        c.includes('konak') ||
+        c.includes('logor') ||
+        c.includes('špilj') ||
+        c.includes('pecina') || c.includes('pećin') ||
+        c.includes('skloniš') || c.includes('skloniste')
+      ) {
+        return 'Karavanski punktovi / logistika';
+      }
+
+      // stećci, nekropole, groblja...
+      if (
+        c.includes('steć') || c.includes('steci') ||
+        c.includes('nekropol') ||
+        c.includes('grobl') || c.includes('gomil')
+      ) {
+        return 'Stećci / nekropole';
+      }
+
+      // rimski putevi, mostovi, vile...
+      if (
+        c.includes('rimski') ||
+        c.includes('via') ||
+        c.includes('put ') || c.endsWith(' put') || c.includes('cesta') ||
+        c.includes('most') ||
+        c.includes('villa') || c.includes('vila')
+      ) {
+        return 'Rimski putevi / mostovi / vile';
+      }
+
+      // ako ne znamo – ništa (ide u sivu fallback boju)
+      return null;
+    }
+
+    function markerStyle(rawCategory) {
+      const group = categoryGroup(rawCategory);
+      const color = CATEGORY_COLORS[group] || '#34495e'; // siva za "nepoznato"
       return {
         radius: 7,
         color: '#ffffff',   // bijeli rub
         weight: 2,
-        fillColor: color,   // boja iz kategorije
+        fillColor: color,
         fillOpacity: 0.9,
-        fill: true          // VAŽNO – inače bude crno
+        fill: true
       };
     }
 
@@ -241,16 +293,17 @@
     function passesFilters(feature) {
       const p = feature.properties || {};
       const period   = (p.period   || '').toString();
-      const category = (p.category || '').toString();
+      const rawCat   = (p.category || '').toString();
+      const group    = categoryGroup(rawCat);
       const text     = ((p.name || '') + ' ' + (p.desc || '') + ' ' + (p.source || '')).toLowerCase();
 
       const wantedPeriod = periodSel.value;
-      const wantedCat    = catSel.value;
+      const wantedGroup  = catSel.value;
       const q            = searchInput.value.trim().toLowerCase();
 
       if (wantedPeriod && period !== wantedPeriod) return false;
-      if (wantedCat && category !== wantedCat)     return false;
-      if (q && !text.includes(q))                  return false;
+      if (wantedGroup && group !== wantedGroup)   return false;
+      if (q && !text.includes(q))                 return false;
 
       return true;
     }
@@ -276,7 +329,12 @@
           const p = feature.properties || {};
           const name     = p.name || 'Bez naziva';
           const period   = p.period ? `<i>${p.period}</i>` : '';
-          const category = p.category ? `Kategorija: ${p.category}` : '';
+          const rawCat   = p.category || '';
+          const group    = categoryGroup(rawCat);
+          const catLine  = group
+            ? `Kategorija: ${group}${rawCat && !rawCat.toLowerCase().includes(group.toLowerCase()) ? ' (' + rawCat + ')' : ''}`
+            : (rawCat ? `Kategorija: ${rawCat}` : '');
+
           const desc     = p.desc || '';
           const src      = p.source ? `Izvor: ${p.source}` : '';
           const why      = p.why ? `Zašto: ${p.why}` : '';
@@ -286,7 +344,7 @@
           const html =
             `<b>${name}</b><br/>` +
             (period ? period + '<br/>' : '') +
-            (category ? category + '<br/>' : '') +
+            (catLine ? catLine + '<br/>' : '') +
             (desc ? '<br/>' + desc + '<br/>' : '') +
             (why ? '<br/>' + why + '<br/>' : '') +
             (evidence ? '<br/>' + evidence + '<br/>' : '') +
@@ -300,9 +358,7 @@
       if (feats.length) {
         try {
           map.fitBounds(LAYER.getBounds(), { padding: [40, 40] });
-        } catch (e) {
-          // ignoriraj ako je jedna točka
-        }
+        } catch (e) { /* ignore */ }
       }
 
       statusEl.textContent = `Točaka (filter): ${feats.length} / ${ALL.features.length}`;
