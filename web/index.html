@@ -1,111 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hajduci – karta</title>
-
-  <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""
   />
-
   <style>
-    html, body {
+    html, body, #map {
       height: 100%;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    /* Karta ispod toolbara */
-    #map {
-      position: absolute;
-      top: 80px;     /* visina toolbara */
-      left: 0;
-      right: 0;
-      bottom: 0;
+    body {
+      font-family: system-ui, -apple-system, Roboto, Arial, sans-serif;
     }
 
     /* Toolbar preko vrha */
     .toolbar-overlay {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 900;
-      background: rgba(255,255,255,0.97);
+      z-index: 950;
+      background: rgba(255,255,255,0.98);
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      padding: 6px 8px;
+      padding: 8px 10px 6px 10px;
       box-sizing: border-box;
     }
 
     .toolbar-title {
+      font-size: 18px;
       font-weight: 600;
       margin-bottom: 4px;
-      font-size: 16px;
     }
 
     .toolbar-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px 10px;
+      gap: 8px;
       align-items: center;
-      font-size: 14px;
+      margin-bottom: 4px;
     }
 
     .toolbar-row label {
+      font-size: 14px;
       display: flex;
       flex-direction: column;
       gap: 2px;
-      font-size: 13px;
-    }
-
-    .toolbar-row label.period,
-    .toolbar-row label.category {
-      flex: 0 0 42%;
-      min-width: 120px;
-    }
-
-    .toolbar-row label.search {
-      flex: 1 1 100%;
-      min-width: 160px;
     }
 
     .toolbar-row select,
-    .toolbar-row input {
-      font-size: 13px;
+    .toolbar-row input[type="text"] {
+      font-size: 14px;
       padding: 4px 6px;
       border-radius: 4px;
       border: 1px solid #ccc;
-      box-sizing: border-box;
+      min-width: 160px;
+    }
+
+    .toolbar-row input[type="text"] {
+      min-width: 220px;
     }
 
     #status {
-      font-size: 12px;
-      color: #555;
+      font-size: 13px;
       margin-left: auto;
       white-space: nowrap;
-    }
-
-    @media (min-width: 640px) {
-      .toolbar-row label.period,
-      .toolbar-row label.category {
-        flex: 0 0 30%;
-      }
-      .toolbar-row label.search {
-        flex: 1 1 auto;
-      }
     }
 
     /* Zoom kontrole – dolje lijevo, potpuno vidljive */
     .leaflet-control-zoom {
       position: absolute !important;
       left: 10px !important;
-      bottom: 10px !important;
+      bottom: 40px !important;
       top: auto !important;
       right: auto !important;
       z-index: 950;
@@ -136,12 +109,11 @@
   </style>
 </head>
 <body>
-
-  <!-- TOOLBAR -->
   <div class="toolbar-overlay">
     <div class="toolbar-title">Hajduci – karta</div>
+
     <div class="toolbar-row">
-      <label class="period">
+      <label>
         Razdoblje:
         <select id="periodFilter">
           <option value="">Sva</option>
@@ -155,49 +127,58 @@
         </select>
       </label>
 
-      <label class="category">
+      <label>
         Kategorija:
         <select id="categoryFilter">
           <option value="">Sve</option>
           <option value="Gradine / utvrde">Gradine / utvrde</option>
-          <option value="Bitke / zasjede">Bitke / zasjede</option>
-          <option value="Karavanski punktovi / logistika">Karavanski punktovi / logistika</option>
+          <option value="Tumuli / gomile">Tumuli / gomile</option>
+          <option value="Pećine / skloništa">Pećine / skloništa</option>
           <option value="Stećci / nekropole">Stećci / nekropole</option>
-          <option value="Rimski putevi / mostovi / vile">Rimski putevi / mostovi / vile</option>
+          <option value="Bitke / zasjede">Bitke / zasjede</option>
+          <option value="Logistika / karavani / hanovi">Logistika / karavani / hanovi</option>
+          <option value="Putevi / mostovi / prijelazi">Putevi / mostovi / prijelazi</option>
+          <option value="Stražare / vidikovci">Stražare / vidikovci</option>
+          <option value="Memorijal / spomenici">Memorijal / spomenici</option>
+          <option value="Događaji / priče">Događaji / priče</option>
+          <option value="Ostalo / neizvjesno">Ostalo / neizvjesno</option>
         </select>
       </label>
+    </div>
 
-      <label class="search">
+    <div class="toolbar-row">
+      <label style="flex:1">
         Pretraži:
         <input id="searchFilter" type="text" placeholder="naziv, opis, izvor…" />
       </label>
-
       <span id="status">Učitavam točke…</span>
     </div>
   </div>
 
-  <!-- KARTA -->
   <div id="map"></div>
 
-  <!-- LEGENDA -->
   <div id="legend" class="legend-overlay">
-    <b>Legenda</b><br>
-    <span class="dot" style="background:#e74c3c"></span> Gradine / utvrde<br>
-    <span class="dot" style="background:#f39c12"></span> Bitke / zasjede<br>
-    <span class="dot" style="background:#9b59b6"></span> Karavanski punktovi / logistika<br>
-    <span class="dot" style="background:#2980b9"></span> Stećci / nekropole<br>
-    <span class="dot" style="background:#2ecc71"></span> Rimski putevi / mostovi / vile<br>
+    <b>Legenda</b><br/>
+    <span class="dot" style="background:#d91e18"></span> Gradine / utvrde<br/>
+    <span class="dot" style="background:#e67e22"></span> Tumuli / gomile<br/>
+    <span class="dot" style="background:#16a085"></span> Pećine / skloništa<br/>
+    <span class="dot" style="background:#9b59b6"></span> Stećci / nekropole<br/>
+    <span class="dot" style="background:#c0392b"></span> Bitke / zasjede<br/>
+    <span class="dot" style="background:#f39c12"></span> Logistika / karavani / hanovi<br/>
+    <span class="dot" style="background:#2980b9"></span> Putevi / mostovi / prijelazi<br/>
+    <span class="dot" style="background:#34495e"></span> Stražare / vidikovci<br/>
+    <span class="dot" style="background:#7f8c8d"></span> Memorijal / spomenici<br/>
+    <span class="dot" style="background:#2ecc71"></span> Događaji / priče<br/>
+    <span class="dot" style="background:#95a5a6"></span> Ostalo / neizvjesno<br/>
   </div>
 
-  <!-- Leaflet JS -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin="">
-  </script>
-
+    integrity="sha256-20nQCchB9coQqIJZRGukZ/29W+K1jvXN1lvTlZBoY3E="
+    crossorigin=""
+  ></script>
   <script>
-    // Inicijalna karta
+    // Init karta
     const map = L.map('map', { zoomControl: true })
       .setView([43.4, 17.2], 9);
 
@@ -206,184 +187,177 @@
       attribution: '&copy; OpenStreetMap suradnici'
     }).addTo(map);
 
-    // Referenca na UI
-    const statusEl    = document.getElementById('status');
-    const periodSel   = document.getElementById('periodFilter');
-    const catSel      = document.getElementById('categoryFilter');
-    const searchInput = document.getElementById('searchFilter');
+    const statusEl   = document.getElementById('status');
+    const periodSel  = document.getElementById('periodFilter');
+    const catSel     = document.getElementById('categoryFilter');
+    const searchInput= document.getElementById('searchFilter');
 
-    // Boje po GRUPAMA kategorija (5 grupa iz legende)
-    const CATEGORY_COLORS = {
-      'Gradine / utvrde': '#e74c3c',
-      'Bitke / zasjede': '#f39c12',
-      'Karavanski punktovi / logistika': '#9b59b6',
-      'Stećci / nekropole': '#2980b9',
-      'Rimski putevi / mostovi / vile': '#2ecc71'
+    const colorByGroup = {
+      'Gradine / utvrde'              : '#d91e18',
+      'Tumuli / gomile'               : '#e67e22',
+      'Pećine / skloništa'            : '#16a085',
+      'Stećci / nekropole'            : '#9b59b6',
+      'Bitke / zasjede'               : '#c0392b',
+      'Logistika / karavani / hanovi' : '#f39c12',
+      'Putevi / mostovi / prijelazi'  : '#2980b9',
+      'Stražare / vidikovci'          : '#34495e',
+      'Memorijal / spomenici'         : '#7f8c8d',
+      'Događaji / priče'              : '#2ecc71',
+      'Ostalo / neizvjesno'           : '#95a5a6'
     };
 
-    // Mapiraj originalni tekst kategorije u jednu od 5 grupa
-    function categoryGroup(cat) {
-      if (!cat) return null;
-      const c = cat.toLowerCase();
+    let ALL = null;
+    let LAYER = null;
 
-      // gradine, utvrde, kule...
-      if (c.includes('gradina') || c.includes('utvr') || c.includes('tvrđ') || c.includes('kula')) {
-        return 'Gradine / utvrde';
-      }
-
-      // bitke, zasjede, pohodi...
-      if (c.includes('bitk') || c.includes('boj') || c.includes('zasjed')) {
-        return 'Bitke / zasjede';
-      }
-
-      // karavane, logor, logističke točke, špilje/pećine kao skloništa...
-      if (
-        c.includes('karavan') ||
-        c.includes('logist') ||
-        c.includes('han') ||
-        c.includes('konak') ||
-        c.includes('logor') ||
-        c.includes('špilj') ||
-        c.includes('pecina') || c.includes('pećin') ||
-        c.includes('skloniš') || c.includes('skloniste')
-      ) {
-        return 'Karavanski punktovi / logistika';
-      }
-
-      // stećci, nekropole, groblja...
-      if (
-        c.includes('steć') || c.includes('steci') ||
-        c.includes('nekropol') ||
-        c.includes('grobl') || c.includes('gomil')
-      ) {
-        return 'Stećci / nekropole';
-      }
-
-      // rimski putevi, mostovi, vile...
-      if (
-        c.includes('rimski') ||
-        c.includes('via') ||
-        c.includes('put ') || c.endsWith(' put') || c.includes('cesta') ||
-        c.includes('most') ||
-        c.includes('villa') || c.includes('vila')
-      ) {
-        return 'Rimski putevi / mostovi / vile';
-      }
-
-      // ako ne znamo – ništa (ide u sivu fallback boju)
-      return null;
+    function featureKey(f){
+      const p = f.properties || {};
+      if(p.id) return 'site:' + p.id;
+      const g = f.geometry || {};
+      const c = g.coordinates || [0,0];
+      return 'site:' + (p.name || 'noname') + '|' + c[1].toFixed(6) + ',' + c[0].toFixed(6);
     }
 
-    function markerStyle(rawCategory) {
-      const group = categoryGroup(rawCategory);
-      const color = CATEGORY_COLORS[group] || '#34495e'; // siva za "nepoznato"
+    // Grupiranje kategorija na temelju teksta u p.category
+    function featureGroup(p){
+      const c = (p.category || p.cat || '').toLowerCase();
+
+      if(/gradin|utvrd|tvrđav|tvrda|kula|kaštel|kastel|burg/.test(c))
+        return 'Gradine / utvrde';
+
+      if(/tum|gomil|humak|gromil/.test(c))
+        return 'Tumuli / gomile';
+
+      if(/pećin|špilj|spilj|jama/.test(c))
+        return 'Pećine / skloništa';
+
+      if(/steć|nekropol|groblj|grob/.test(c))
+        return 'Stećci / nekropole';
+
+      if(/bitk|zasjed|boj/.test(c))
+        return 'Bitke / zasjede';
+
+      if(/karavan|logistik|han|stanic|baza|magacin/.test(c))
+        return 'Logistika / karavani / hanovi';
+
+      if(/rimski put|via|cest|put|most|prijelaz|prilaz/.test(c))
+        return 'Putevi / mostovi / prijelazi';
+
+      if(/stražar|straža|vidikov/.test(c))
+        return 'Stražare / vidikovci';
+
+      if(/spomen|memorijal|monument/.test(c))
+        return 'Memorijal / spomenici';
+
+      if(/dogadj|događ|priča|legend|napad|pljačk/.test(c))
+        return 'Događaji / priče';
+
+      return 'Ostalo / neizvjesno';
+    }
+
+    function markerStyle(p){
+      const group = featureGroup(p);
+      const fill  = colorByGroup[group] || '#95a5a6';
       return {
-        radius: 7,
-        color: '#ffffff',   // bijeli rub
+        radius: 8,
+        color: '#ffffff',
         weight: 2,
-        fillColor: color,
-        fillOpacity: 0.9,
-        fill: true
+        fillColor: fill,
+        fillOpacity: 0.96
       };
     }
 
-    let ALL   = null;  // cijeli GeoJSON
-    let LAYER = null;  // trenutni sloj
+    function popupHtml(p){
+      const name  = p.name || '(bez naziva)';
+      const period= p.period || '';
+      const group = featureGroup(p);
+      const desc  = p.desc || '';
+      const why   = p.why || '';
+      const evid  = p.evidence || '';
+      const next  = p.next_steps || '';
+      const prob  = p.confidence || p.importance || '';
 
-    function passesFilters(feature) {
-      const p = feature.properties || {};
-      const period   = (p.period   || '').toString();
-      const rawCat   = (p.category || '').toString();
-      const group    = categoryGroup(rawCat);
-      const text     = ((p.name || '') + ' ' + (p.desc || '') + ' ' + (p.source || '')).toLowerCase();
+      return `
+        <b>${name}</b><br/>
+        ${period ? `<i>${period}</i><br/>` : ''}
+        ${group ? `<b>Kategorija:</b> ${group}<br/>` : ''}
+        ${desc ? `${desc}<br/>` : ''}
+        ${evid ? `<b>Dokazi:</b> ${evid}<br/>` : ''}
+        ${why  ? `<b>Zašto ovdje:</b> ${why}<br/>` : ''}
+        ${prob ? `<b>Vjerojatnost pronalaska:</b> ${prob}<br/>` : ''}
+        ${next ? `<b>Sljedeći koraci:</b> ${next}` : ''}
+      `;
+    }
 
-      const wantedPeriod = periodSel.value;
-      const wantedGroup  = catSel.value;
-      const q            = searchInput.value.trim().toLowerCase();
+    function passFilters(f){
+      const p = f.properties || {};
+      const periodFilter = periodSel.value || '';
+      const catFilter    = catSel.value || '';
+      const text         = (searchInput.value || '').toLowerCase().trim();
 
-      if (wantedPeriod && period !== wantedPeriod) return false;
-      if (wantedGroup && group !== wantedGroup)   return false;
-      if (q && !text.includes(q))                 return false;
+      if(periodFilter && (p.period || '') !== periodFilter) return false;
 
+      const grp = featureGroup(p);
+      if(catFilter && grp !== catFilter) return false;
+
+      if(text){
+        const hay = (
+          (p.name || '') + ' ' +
+          (p.desc || '') + ' ' +
+          (p.source || '') + ' ' +
+          (p.why || '')
+        ).toLowerCase();
+        if(!hay.includes(text)) return false;
+      }
       return true;
     }
 
-    function render() {
-      if (!ALL) return;
+    function render(){
+      if(!ALL) return;
+      if(LAYER) map.removeLayer(LAYER);
 
-      if (LAYER) {
-        map.removeLayer(LAYER);
-      }
+      const feats = ALL.features.filter(passFilters);
 
-      const feats = ALL.features.filter(passesFilters);
-
-      LAYER = L.geoJSON({
-        type: 'FeatureCollection',
-        features: feats
-      }, {
-        pointToLayer: (feature, latlng) => {
-          const p = feature.properties || {};
-          return L.circleMarker(latlng, markerStyle(p.category));
+      LAYER = L.geoJSON({type:'FeatureCollection', features:feats},{
+        pointToLayer: (f, latlng) => {
+          return L.circleMarker(latlng, markerStyle(f.properties || {}));
         },
-        onEachFeature: (feature, layer) => {
-          const p = feature.properties || {};
-          const name     = p.name || 'Bez naziva';
-          const period   = p.period ? `<i>${p.period}</i>` : '';
-          const rawCat   = p.category || '';
-          const group    = categoryGroup(rawCat);
-          const catLine  = group
-            ? `Kategorija: ${group}${rawCat && !rawCat.toLowerCase().includes(group.toLowerCase()) ? ' (' + rawCat + ')' : ''}`
-            : (rawCat ? `Kategorija: ${rawCat}` : '');
-
-          const desc     = p.desc || '';
-          const src      = p.source ? `Izvor: ${p.source}` : '';
-          const why      = p.why ? `Zašto: ${p.why}` : '';
-          const evidence = p.evidence ? `Dokazi: ${p.evidence}` : '';
-          const next     = p.next_steps ? `Daljnji koraci: ${p.next_steps}` : '';
-
-          const html =
-            `<b>${name}</b><br/>` +
-            (period ? period + '<br/>' : '') +
-            (catLine ? catLine + '<br/>' : '') +
-            (desc ? '<br/>' + desc + '<br/>' : '') +
-            (why ? '<br/>' + why + '<br/>' : '') +
-            (evidence ? '<br/>' + evidence + '<br/>' : '') +
-            (src ? '<br/>' + src + '<br/>' : '') +
-            (next ? '<br/>' + next + '<br/>' : '');
-
-          layer.bindPopup(html);
+        onEachFeature: (f, layer) => {
+          layer.bindPopup(popupHtml(f.properties || {}));
         }
       }).addTo(map);
 
-      if (feats.length) {
-        try {
-          map.fitBounds(LAYER.getBounds(), { padding: [40, 40] });
-        } catch (e) { /* ignore */ }
+      if(feats.length){
+        try{
+          map.fitBounds(LAYER.getBounds(), {padding:[40,40]});
+        }catch(e){}
       }
 
-      statusEl.textContent = `Točaka (filter): ${feats.length} / ${ALL.features.length}`;
+      const total = ALL.features.length;
+      statusEl.textContent = `Točaka (filter): ${feats.length} / ${total}`;
     }
 
-    function loadData() {
+    function attachHandlers(){
+      periodSel.addEventListener('change', render);
+      catSel.addEventListener('change', render);
+      searchInput.addEventListener('input', () => {
+        clearTimeout(window.__searchTimer);
+        window.__searchTimer = setTimeout(render, 200);
+      });
+    }
+
+    async function loadData(){
       statusEl.textContent = 'Učitavam točke…';
-      fetch('sites.geojson')
-        .then(r => r.json())
-        .then(json => {
-          ALL = json;
-          render();
-        })
-        .catch(err => {
-          console.error('Greška pri učitavanju sites.geojson:', err);
-          statusEl.textContent = 'Greška pri učitavanju podataka.';
-        });
+      try{
+        const r = await fetch('sites.geojson?v=' + Date.now());
+        ALL = await r.json();
+        attachHandlers();
+        render();
+      }catch(e){
+        console.error(e);
+        statusEl.textContent = 'Greška pri učitavanju točaka.';
+      }
     }
 
-    // Eventi
-    periodSel.addEventListener('change', render);
-    catSel.addEventListener('change', render);
-    searchInput.addEventListener('input', render);
-
-    // Kreni
     loadData();
   </script>
 </body>
