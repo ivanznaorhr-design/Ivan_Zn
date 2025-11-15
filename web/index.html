@@ -209,9 +209,9 @@
     }).addTo(map);
 
     // Referenca na UI
-    const statusEl   = document.getElementById('status');
-    const periodSel  = document.getElementById('periodFilter');
-    const catSel     = document.getElementById('categoryFilter');
+    const statusEl    = document.getElementById('status');
+    const periodSel   = document.getElementById('periodFilter');
+    const catSel      = document.getElementById('categoryFilter');
     const searchInput = document.getElementById('searchFilter');
 
     // Boje po kategorijama – iste kao u legendi
@@ -224,18 +224,19 @@
     };
 
     function markerStyle(category) {
-      const color = CATEGORY_COLORS[category] || '#34495e';
+      const color = CATEGORY_COLORS[category] || '#34495e'; // fallback siva
       return {
         radius: 7,
-        color: '#ffffff',
+        color: '#ffffff',   // bijeli rub
         weight: 2,
-        fillColor: color,
-        fillOpacity: 0.9
+        fillColor: color,   // boja iz kategorije
+        fillOpacity: 0.9,
+        fill: true          // VAŽNO – inače bude crno
       };
     }
 
-    let ALL = null;      // cijeli GeoJSON
-    let LAYER = null;    // trenutni prikazani sloj
+    let ALL   = null;  // cijeli GeoJSON
+    let LAYER = null;  // trenutni sloj
 
     function passesFilters(feature) {
       const p = feature.properties || {};
@@ -300,7 +301,7 @@
         try {
           map.fitBounds(LAYER.getBounds(), { padding: [40, 40] });
         } catch (e) {
-          // ignore ako je samo jedna točka
+          // ignoriraj ako je jedna točka
         }
       }
 
