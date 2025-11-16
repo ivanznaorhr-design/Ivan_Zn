@@ -3,361 +3,353 @@
   "features": [
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.2140, 43.4460] },
+      "geometry": { "type": "Point", "coordinates": [16.52, 43.56] },
       "properties": {
-        "id": "gradina-imotski",
-        "name": "Gradina – Imotski",
-        "category": "Utvrda",
-        "period": "Srednji vijek",
-        "importance": 5,
-        "confidence": "high",
-        "why": "Dominantna pozicija, povijesni zapisi o utvrdi, višeslojno naseljavanje od prapovijesti do Habsburga.",
-        "desc": "Središnja utvrda Imotskog; potencijal za nalaze keramičkih horizonata, metalnih predmeta, bedema i podzemnih prostora.",
-        "evidence": "Povijesni izvori, austrijske karte, lokalna arheološka literatura.",
-        "source": "Povijesni arhiv Split; starije topografske karte.",
-        "next_steps": "Detaljna fotogrametrija zidina, GIS analiza vidljivosti, sondiranje na sumnjivim terasama."
+        "name": "Tvrđava Klis",
+        "period": "Antika – novovjekovno",
+        "category": "Gradine / utvrde",
+        "desc": "Strateška utvrda na prijevoju između obale i zaleđa; kontrola rimskog, srednjovjekovnog i osmanskog puta između Salone/Splita i unutrašnjosti."
       }
     },
 
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.2160, 43.4485] },
+      "geometry": { "type": "Point", "coordinates": [16.49, 43.54] },
       "properties": {
-        "id": "modro-jezero-grad",
-        "name": "Modro jezero – prapovijesni i srednjovjekovni slojevi",
-        "category": "Sakralno / utvrda",
-        "period": "Prapovijest + Srednji vijek",
-        "importance": 4,
-        "confidence": "medium",
-        "why": "Prirodni fenomen uz gradinu; rubovi kratera idealni za prapovijesno naselje i kasnije stražarska mjesta.",
-        "desc": "Rubovi jezera i prilazne staze mogu skrivati prapovijesne naseobine, grobne humke i kasnije stražarnice koje kontroliraju prolaz.",
-        "evidence": "Analogije s drugim krškim jezerima i obodnim naseljima, usmena predaja.",
-        "source": "Lokalne priče; usporedba s Vranskim jezerom i Livanjskim poljem.",
-        "next_steps": "Pješački obilazak rubova, traženje keramike na površini; pregled starih fotografija prije uređenja staza."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.1950, 43.4100] },
-      "properties": {
-        "id": "kamenmost-prijelaz",
-        "name": "Kamenmost – prijelaz i karavanska točka",
-        "category": "Logistika",
-        "period": "Osmansko razdoblje",
-        "importance": 3,
-        "confidence": "medium",
-        "why": "Suženje doline i prijelaz preko vode; zapisane rute karavana kroz Imotsko polje.",
-        "desc": "Mogući punkt za ubiranje carine, odmorište i zamjenu konja. Potencijal za sitan metalni i novčani nalaz u okolnim vrtovima.",
-        "evidence": "Stare karte s označenim prijelazom, konfiguracija terena.",
-        "source": "Austrijske karte 18.–19. st.; lokalna tradicija o prijelazu.",
-        "next_steps": "Razgovor sa stanovnicima starijih kuća; pregled ruba polja nakon oranja."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [16.9750, 43.5110] },
-      "properties": {
-        "id": "cista-velika-tumuli",
-        "name": "Cista Velika – skupina tumula",
-        "category": "Grobni humci",
-        "period": "Prapovijest",
-        "importance": 4,
-        "confidence": "medium",
-        "why": "Poznata koncentracija gomila i stećaka na zaravni iznad sela.",
-        "desc": "Velika grobna nekropola s tumulima i kasnijim stećcima; mogući višestruki ukopi i ponovna uporaba kroz stoljeća.",
-        "evidence": "Topografske karte s označenim ‘gomilama’, arheološke bilješke.",
-        "source": "Objavljeni pregledi nekropola u Dalmatinskoj zagori.",
-        "next_steps": "Kartiranje svih gomila dronom; traženje oštećenih tumula i rubnih naselja."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.2250, 43.4220] },
-      "properties": {
-        "id": "zmijavci-gomile",
-        "name": "Zmijavci – gomile i rubno naselje",
-        "category": "Grobni humci",
-        "period": "Prapovijest",
-        "importance": 3,
-        "confidence": "medium",
-        "why": "Linija gomila prati staru komunikaciju prema Biokovu.",
-        "desc": "Više manjih gomila, vjerojatno obiteljske nekropole uz prapovijesni put. Mogući nalazi keramike i spaljenih kostiju.",
-        "evidence": "Vizualna analiza satelitskih snimaka; oznake na kartama.",
-        "source": "OpenStreetMap + stare vojne karte.",
-        "next_steps": "Pješačko snimanje svakog humka; kontakt s vlasnicima parcela."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.0480, 43.4170] },
-      "properties": {
-        "id": "zagvozd-prijevoj",
-        "name": "Prijevoj kod Zagvozda – kontrola prolaza na Biokovo",
-        "category": "Komunikacija",
-        "period": "Antika + Srednji vijek",
-        "importance": 3,
-        "confidence": "low",
-        "why": "Najlogičniji prijelaz između obale i zaleđa; antički putovi često koriste iste prijevoje.",
-        "desc": "Potencijalno mjesto rimske ili srednjovjekovne stražarnice; mogući ostaci suhozida i keramike na terasama.",
-        "evidence": "Reljef, linije suhozida, analogija s drugim planinskim prijevojima.",
-        "source": "Terenska opažanja i topografske karte.",
-        "next_steps": "Pregled visinskih točaka; provjeriti stare katastarske planove."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.3710, 43.2080] },
-      "properties": {
-        "id": "vrgorac-gradina",
-        "name": "Vrgorac – utvrda i podgrađe",
-        "category": "Utvrda",
-        "period": "Srednji vijek + Osmansko razdoblje",
-        "importance": 4,
-        "confidence": "high",
-        "why": "Povijesno potvrđena utvrda na stijeni, važna točka između Neretve i Imotskog.",
-        "desc": "Grad na stijeni, podgrađe na padini; očekivani slojevi kuća, cisterna, vojnih struktura i kasnijih dogradnji.",
-        "evidence": "Povijesni opisi, sačuvani zidovi, vidljiv urbanistički raspored.",
-        "source": "Lokalna monografija o Vrgorcu; putopisne bilješke.",
-        "next_steps": "Detaljna dokumentacija zidova; traženje starijih slojeva ispod novijih kuća."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.3480, 43.2480] },
-      "properties": {
-        "id": "ravca-uskoci",
-        "name": "Ravča – planinski prolaz i uskoci",
-        "category": "Hajduci / uskoci",
-        "period": "Mletačko razdoblje",
-        "importance": 3,
-        "confidence": "low",
-        "why": "Usjek kroz Biokovo; u zapisima se spominju prepadi na karavane u vrgoračkom kraju.",
-        "desc": "Potencijalne zasjede uz put; moguće kamene zaklone, ognjišta i tragovi kratkotrajnih logora.",
-        "evidence": "Funkcionalna logika terena; usmene predaje o hajducima.",
-        "source": "Lokalne priče; razni povijesni pregledi uskoka.",
-        "next_steps": "Markirati mjesta s dobrim zaklonom i pogledom; tražiti metalne predmete i čaure (noviji sloj)."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.2410, 43.4412] },
-      "properties": {
-        "id": "bitka-1717",
-        "name": "Bitka kod Imotskog 1717.",
-        "category": "Bitka",
-        "period": "Mletačko razdoblje",
-        "importance": 5,
-        "confidence": "medium",
-        "why": "Poznata bitka između Mlečana i Osmanlija; oslobađanje Imotskog.",
-        "desc": "Šire bojno polje s mogućim nalazima vojne opreme, metaka, konjaničke opreme i logorskih zona.",
-        "evidence": "Vojni zapisi i mletačke karte; opisi kretanja trupa.",
-        "source": "Archivio di Stato di Venezia (objavljeni izvodi).",
-        "next_steps": "Analiza reljefa za linije napada; ciljano metal detektiranje uz dozvolu."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.2600, 43.4659] },
-      "properties": {
-        "id": "hajducki-logor-vinjani",
-        "name": "Hajdučki logor kod Vinjana",
-        "category": "Lokalitet / logor",
-        "period": "Osmansko razdoblje",
-        "importance": 4,
-        "confidence": "medium",
-        "why": "Šumoviti plato s vodom; navodi o hajduku Kalaji i napadima na karavane.",
-        "desc": "Mogući polutrajni logor s ognjištima, zaklonima i skrovištima za plijen.",
-        "evidence": "Etnografski zapisi, toponimi ‘Hajdučka draga’, ‘Jama hajduka’.",
-        "source": "Zbornik Imotske krajine 1936. (sekundarni navodi).",
-        "next_steps": "Terenska prospekcija; snimanje dronom ujutro i navečer radi uočavanja struktura."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.1960, 43.5101] },
-      "properties": {
-        "id": "pojilo-karavane",
-        "name": "Pojilo – sastanak stočara i karavana",
-        "category": "Logistika",
-        "period": "Novi vijek",
-        "importance": 2,
-        "confidence": "low",
-        "why": "Mjesto vode i raskrižje staza; logično mjesto za tružište i razmjenu vijesti.",
-        "desc": "Potencijal za sitne nalaze – kovanice, kopče, prstenje – rasute oko pojila.",
-        "evidence": "Funkcionalna logika kretanja stoke i ljudi.",
-        "source": "Lokalna tradicija o sastajalištima stočara.",
-        "next_steps": "Fieldwalking nakon kiše; razgovor sa starijim stočarima."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.3370, 43.4720] },
-      "properties": {
-        "id": "posusje-gradina",
-        "name": "Posušje – gradina iznad polja",
-        "category": "Gradina",
-        "period": "Prapovijest + Rani srednji vijek",
-        "importance": 4,
-        "confidence": "medium",
-        "why": "Brdo iznad polja sa širokim vidikom, tipično mjesto za gradinu.",
-        "desc": "Mogući višeslojni nasip i bedemi; na padinama očekivani ostaci kuća i radionica.",
-        "evidence": "Reljef i analogija s drugim gradinama uz polja.",
-        "source": "Lokalne topografske karte i OSM podaci.",
-        "next_steps": "Pretražiti obronke za keramiku; provjeriti postoje li lokalni nazivi ‘Gradina’, ‘Kula’."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.4090, 43.5550] },
-      "properties": {
-        "id": "rakitno-steci",
-        "name": "Rakitno – stećci uz staru cestu",
-        "category": "Stećci",
-        "period": "Srednji vijek",
-        "importance": 3,
-        "confidence": "medium",
-        "why": "Poznata koncentracija stećaka u široj okolici; položaj uz komunikaciju.",
-        "desc": "Raspršeni stećci uz rub zaravni; potencijal za ranije tumule ispod ploča.",
-        "evidence": "Pregled arheoloških publikacija o stećcima i ortofoto snimke.",
-        "source": "Pregled nekropola Zapadne Hercegovine.",
-        "next_steps": "Kartirati svaki spomenik; zabilježiti orijentaciju i ukrase."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.5450, 43.2000] },
-      "properties": {
-        "id": "ljubuski-tvrdava",
-        "name": "Ljubuški – tvrđava Herceg Stjepana",
-        "category": "Utvrda",
-        "period": "Srednji vijek",
-        "importance": 5,
-        "confidence": "high",
-        "why": "Monumentalna tvrđava s dugom upotrebom, kontrola Neretve i putova.",
-        "desc": "Slojeviti ostaci zidina, kula i podgrađa; potencijal za nalaze od kasne antike do osmanskog razdoblja.",
-        "evidence": "Sačuvani zidovi, povijesni zapisi, arheološka istraživanja.",
-        "source": "Monografije o Ljubuškom i Hercegovini.",
-        "next_steps": "Mapiranje svih faza gradnje; usporedba s osmanskim planovima."
-      }
-    },
-
-    {
-      "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.5710, 43.2180] },
-      "properties": {
-        "id": "humac-rimsko-naselje",
-        "name": "Humac – rimsko naselje i put",
-        "category": "Antičko naselje",
+        "name": "Salona (Solin) – rimski grad",
         "period": "Antika",
-        "importance": 4,
-        "confidence": "medium",
-        "why": "Područje poznatih rimskih nalaza i natpisa; blizina stare ceste.",
-        "desc": "Vjerojatno cestovno naselje s kućama uz os; mogući ostaci termi i svetišta.",
-        "evidence": "Objavljeni natpisi i arheološki nalazi iz Humca.",
-        "source": "Znanstveni radovi o rimskim natpisima u Zapadnoj Hercegovini.",
-        "next_steps": "Povezati sve nalaze u GIS; tražiti širenje naselja prema polju."
+        "category": "Gradine / utvrde",
+        "desc": "Ostaci glavnog grada rimske provincije Dalmacije s forumom, amfiteatrom i nekropolama; ogromna koncentracija antičkog materijala."
       }
     },
 
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.4010, 43.3770] },
+      "geometry": { "type": "Point", "coordinates": [17.65, 43.05] },
       "properties": {
-        "id": "grude-steci",
-        "name": "Grude – stećci i staro selo",
-        "category": "Stećci",
+        "name": "Narona (Vid kod Metkovića)",
+        "period": "Antika",
+        "category": "Memorijal / spomenici",
+        "desc": "Rimski municipij s hramom Augusteuma i bogatim nalazima skulptura; ključna točka na rimskoj komunikaciji uz Neretvu."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.22, 43.45] },
+      "properties": {
+        "name": "Topana – utvrda iznad Imotskog",
+        "period": "Srednji vijek – osmansko razdoblje",
+        "category": "Gradine / utvrde",
+        "desc": "Utvrda iznad Modrog jezera koja kontrolira prolaz iz Imotskog polja prema Hercegovini; više graditeljskih faza."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.22, 43.45] },
+      "properties": {
+        "name": "Modro jezero – rubovi kratera",
+        "period": "Neodređeno",
+        "category": "Ostalo / neizvjesno",
+        "desc": "Prirodna depresija čiji rubovi nude mogućnost povremenog korištenja kao skloništa, staza i osmatračnica."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [16.95, 43.6] },
+      "properties": {
+        "name": "Nekropola stećaka Cista Velika – Crljivica",
+        "period": "Kasni srednji vijek",
+        "category": "Stećci / nekropole",
+        "desc": "Velika nekropola stećaka uz staru cestu Sinj–Imotski; brojni ukrasi i natpisi, pokazatelj intenzivne kasnosrednjovjekovne aktivnosti."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.05, 43.4] },
+      "properties": {
+        "name": "Nekropola stećaka Zagvozd – Borje",
+        "period": "Kasni srednji vijek",
+        "category": "Stećci / nekropole",
+        "desc": "Skupina stećaka na prijevoju ispod Biokova, uz stare puteve iz Imotske krajine prema obali."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [16.64, 43.7] },
+      "properties": {
+        "name": "Sinj – tvrđava i grad",
+        "period": "Srednji vijek – novovjekovno",
+        "category": "Gradine / utvrde",
+        "desc": "Tvrđava Kamičak i stariji slojevi naselja povezani s obrambenom linijom prema osmanskoj granici u Cetinskoj krajini."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [16.69, 43.44] },
+      "properties": {
+        "name": "Omiš – srednjovjekovne kule",
         "period": "Srednji vijek",
-        "importance": 3,
-        "confidence": "medium",
-        "why": "Nekoliko nekropola na blagim padinama iznad puta.",
-        "desc": "Stećci grupirani uz nekadašnji seoski put; moguće starije grobne konstrukcije ispod.",
-        "evidence": "Topografske oznake i lokalne skice nekropola.",
-        "source": "Lokalni muzejski materijal.",
-        "next_steps": "Precizno snimanje GPS-om; provjeriti eventualne devastacije."
+        "category": "Gradine / utvrde",
+        "desc": "Utvrde na liticama iznad Omiša (Fortica, Mirabela) koje kontroliraju ušće Cetine i obalski plovni put."
       }
     },
 
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.0070, 43.8260] },
+      "geometry": { "type": "Point", "coordinates": [16.53, 43.57] },
       "properties": {
-        "id": "livno-polje",
-        "name": "Livanjsko polje – rimska i osmanska logistika",
-        "category": "Polje / put",
-        "period": "Antika + Osmansko razdoblje",
-        "importance": 3,
-        "confidence": "low",
-        "why": "Veliko polje kroz koje prolaze glavne rute između unutrašnjosti i Jadrana.",
-        "desc": "Mnoštvo mogućih stanica, mostova i logora; ovdje je označen reprezentativni punkt za cijelo polje.",
-        "evidence": "Opći povijesni pregledi; reljef i orijentacija polja.",
-        "source": "Povijest Livna i prometnih pravaca u Bosni.",
-        "next_steps": "Odabrati prioritetne točke: mostovi, raskrižja, uzvisine s pogledom na polje."
+        "name": "Klis – rimska i srednjovjekovna cesta",
+        "period": "Antika – srednji vijek",
+        "category": "Putevi / mostovi / prijelazi",
+        "desc": "Prijevoj kojim prolaze antičke i srednjovjekovne komunikacije između Salone/Splita i unutrašnjosti; potencijalni tragovi kolotraza i punktova uz put."
       }
     },
 
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.2260, 43.7180] },
+      "geometry": { "type": "Point", "coordinates": [16.5, 43.55] },
       "properties": {
-        "id": "tomislavgrad-plato",
-        "name": "Tomislavgrad – plato iznad grada",
-        "category": "Gradina / naselje",
-        "period": "Rani srednji vijek",
-        "importance": 3,
-        "confidence": "low",
-        "why": "Povezuje se s ranosrednjovjekovnom tradicijom kralja Tomislava; strateški plato.",
-        "desc": "Mogući tragovi starijeg naselja ili utvrde; sadašnji grad prekriva dio starog sloja.",
-        "evidence": "Povijesne hipoteze; strateški položaj.",
-        "source": "Povijesne sinteze o Duvnu/Tomislavgradu.",
-        "next_steps": "Pregled starijih katastarskih planova i lokacija starih crkava."
+        "name": "Rimski most na Jadru (Solin)",
+        "period": "Antika",
+        "category": "Putevi / mostovi / prijelazi",
+        "desc": "Ostaci rimskog mosta preko Jadra povezanog sa salonitanskom cestovnom mrežom."
       }
     },
 
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.2900, 43.4040] },
+      "geometry": { "type": "Point", "coordinates": [16.63, 43.6] },
       "properties": {
-        "id": "granica-medas",
-        "name": "Granični međaš HR–BiH kod Vinjana",
-        "category": "Granični kamen",
-        "period": "Habsburško razdoblje",
-        "importance": 2,
-        "confidence": "medium",
-        "why": "Granica utvrđena nakon razgraničenja; kameni stup s uklesanim oznakama.",
-        "desc": "Granica definira kasnije tokove krijumčarenja i kretanja hajduka; marker važan za priče i terensko orijentiranje.",
-        "evidence": "Karte razgraničenja; fizički postojeći kamen.",
-        "source": "Državni arhivi i geodetske karte.",
-        "next_steps": "Fotogrametrija kamena; razgovor s lokalnim vodičima o skrivenim prijelazima."
+        "name": "Vranjača – špilja kod Dugopolja",
+        "period": "Prapovijest – povijesno",
+        "category": "Pećine / skloništa",
+        "desc": "Špiljski sustav na južnim obroncima Mosora; potencijal za prapovijesnu i kasniju uporabu kao sklonište i sezonsko boravište."
       }
     },
 
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [17.0600, 43.3380] },
+      "geometry": { "type": "Point", "coordinates": [17.32, 43.37] },
       "properties": {
-        "id": "biokovo-strazarnica",
-        "name": "Biokovo – planinska stražarnica",
-        "category": "Stražarnica",
-        "period": "Osmansko razdoblje",
-        "importance": 3,
-        "confidence": "low",
-        "why": "Istaknuti greben s pogledom na more i zaleđe; idealno za signalizaciju.",
-        "desc": "Mogući ostaci kamenih zaklona, ognjišta i signalnih gomila.",
-        "evidence": "Reljef i linija vidljivosti; analogije s drugim planinskim stražarnicama.",
-        "source": "Lokalne planinarske karte i bilješke.",
-        "next_steps": "Noćno promatranje linija vidljivosti; traženje kalciniranog kamena oko ognjišta."
+        "name": "Ravlića pećina – Peć Mlini kod Gruda",
+        "period": "Prapovijest – srednji vijek",
+        "category": "Pećine / skloništa",
+        "desc": "Špilja iznad izvora Tihaljine s poznatim nalazima iz prapovijesti i kasnijih razdoblja; kontrolira prolaz prema Imotskom."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.33, 43.48] },
+      "properties": {
+        "name": "Posušje – gradina iznad polja",
+        "period": "Prapovijest – srednji vijek",
+        "category": "Gradine / utvrde",
+        "desc": "Dominantna uzvisina s tragovima suhozida iznad Posuškog polja, pogodna za prapovijesnu gradinu i kasniju osmatračnicu."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.36, 43.47] },
+      "properties": {
+        "name": "Ričina – stećci kod Posušja",
+        "period": "Kasni srednji vijek",
+        "category": "Stećci / nekropole",
+        "desc": "Nekropola stećaka uz staru komunikaciju kroz Posuško polje."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.55, 43.19] },
+      "properties": {
+        "name": "Ljubuški – tvrđava hercega Stjepana",
+        "period": "Srednji vijek – osmansko razdoblje",
+        "category": "Gradine / utvrde",
+        "desc": "Utvrda na stijeni iznad Ljubuškog s vidikom na Neretvu; više građevinskih faza od kasnog srednjeg vijeka do Osmanlija."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.73, 43.07] },
+      "properties": {
+        "name": "Počitelj – utvrđeni grad",
+        "period": "Srednji vijek – osmansko razdoblje",
+        "category": "Gradine / utvrde",
+        "desc": "Kameni grad na litici iznad Neretve s kulama i bedemima; važna točka u kontroli doline Neretve."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.37, 43.2] },
+      "properties": {
+        "name": "Vrgorac – stari grad",
+        "period": "Srednji vijek – novovjekovno",
+        "category": "Gradine / utvrde",
+        "desc": "Utvrđeni sklop na dominantnoj stijeni iznad Vrgorca, s vizualnom kontrolom nad putovima prema Imotskom i Neretvi."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.02, 43.29] },
+      "properties": {
+        "name": "Makarska – sv. Petar / poluotok",
+        "period": "Antika – srednji vijek",
+        "category": "Stražare / vidikovci",
+        "desc": "Poluotok na ulazu u makarsku luku, moguć položaj signalnih ili stražarskih točaka uz plovni put."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [16.2, 44.04] },
+      "properties": {
+        "name": "Knin – tvrđava",
+        "period": "Srednji vijek – novovjekovno",
+        "category": "Gradine / utvrde",
+        "desc": "Jedna od najvećih tvrđava u Hrvatskoj, s prapovijesnim i ranosrednjovjekovnim slojevima na uzvisini iznad Knina."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [16.16, 43.86] },
+      "properties": {
+        "name": "Drniš – Gradina",
+        "period": "Prapovijest – srednji vijek",
+        "category": "Gradine / utvrde",
+        "desc": "Uzvisina s ostacima bedema iznad drniškog područja; povezana s kontrolom pristupa Petrovu polju."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [15.89, 43.74] },
+      "properties": {
+        "name": "Šibenik – tvrđave sv. Mihovil i Barone",
+        "period": "Srednji vijek – novovjekovno",
+        "category": "Gradine / utvrde",
+        "desc": "Lanac utvrda iznad starog Šibenika koje nadziru ulaz u kanal sv. Ante i put prema unutrašnjosti."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [16.9, 43.57] },
+      "properties": {
+        "name": "Tumulus polje – Cista Provo",
+        "period": "Prapovijest (brončano – željezno doba)",
+        "category": "Tumuli / gomile",
+        "desc": "Šire polje kamenih gomila južno od Ciste Provo, tipično za prapovijesne grobne humke u Imotsko-sinjskom zaleđu."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.0, 43.83] },
+      "properties": {
+        "name": "Livno – gradina iznad Livanjskog polja",
+        "period": "Prapovijest – srednji vijek",
+        "category": "Gradine / utvrde",
+        "desc": "Dominantno brdo s ostacima bedema i kasnije tvrđave, s pogledom na Livanjsko polje."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.22, 43.72] },
+      "properties": {
+        "name": "Tomislavgrad – tumuli na Duvanjskom polju",
+        "period": "Prapovijest – rano srednji vijek",
+        "category": "Tumuli / gomile",
+        "desc": "Niz prapovijesnih gomila koje okvirno prate rubove Duvanjskog polja; tradicionalno povezane i s ranosrednjovjekovnim slojevima."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [16.63, 43.72] },
+      "properties": {
+        "name": "Sinjsko polje – rimska cesta i mostovi",
+        "period": "Antika",
+        "category": "Putevi / mostovi / prijelazi",
+        "desc": "Trasa rimske ceste kroz Sinjsko polje s mogućim ostacima mostova i stanica (mansio) na prijelazima rijeke Cetine."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.18, 43.47] },
+      "properties": {
+        "name": "Proložac – rimski put prema Cisti",
+        "period": "Antika",
+        "category": "Putevi / mostovi / prijelazi",
+        "desc": "Segment antičke komunikacije iz doline Vrljike prema prijevoju kod Ciste; tragovi nasipa i mogućih odmorišta uz put."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.1, 43.35] },
+      "properties": {
+        "name": "Rimski put Biokovo – prijevoj Staza",
+        "period": "Antika – srednji vijek",
+        "category": "Putevi / mostovi / prijelazi",
+        "desc": "Stari prijelaz preko Biokova između makarskog i imotskog područja, vjerojatna antička i srednjovjekovna ruta s mogućim postajama."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.13, 43.43] },
+      "properties": {
+        "name": "Vidikovac – Zavelim iznad Zabiokovlja",
+        "period": "Prapovijest – povijesno",
+        "category": "Stražare / vidikovci",
+        "desc": "Greben planine Zavelim s više mogućih osmatračnica i manjih gradinskih terasa iznad pravca Imotski–Posušje."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.96, 43.1] },
+      "properties": {
+        "name": "Radimlja – nekropola stećaka",
+        "period": "Kasni srednji vijek",
+        "category": "Stećci / nekropole",
+        "desc": "Jedna od najpoznatijih nekropola stećaka kod Stoca, s bogato ukrašenim spomenicima i natpisima."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [16.63, 43.7] },
+      "properties": {
+        "name": "Sinj – Alkaško trkalište",
+        "period": "Novovjekovno",
+        "category": "Događaji / priče",
+        "desc": "Prostor Sinjske alke kao memorija bitke 1715. godine; potencijal potonjih nalaza vezanih uz vojnu opremu i tradiciju."
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [17.2, 43.44] },
+      "properties": {
+        "name": "Imotsko polje – granica Mletačke i Osmanske vlasti",
+        "period": "Novovjekovno",
+        "category": "Događaji / priče",
+        "desc": "Šire područje brojnih manjih zasjeda i sukoba na mletačko-osmanskoj granici; potencijal raspršenih nalaza oružja i opreme."
       }
     }
   ]
